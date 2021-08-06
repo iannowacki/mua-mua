@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import {globalStyles} from '../styles/global';
+import { useContext } from 'react';
+import AppContext from '../components/AppContext';
 
 const SearchScreen = ({navigation}) => {
     const [bookings, setBookings] = useState([
@@ -26,6 +28,8 @@ const SearchScreen = ({navigation}) => {
         });
     }
 
+    const bookings2 = useContext(AppContext);
+    
     
     return(
         <View style={styles.container}>
@@ -61,7 +65,8 @@ const styles = StyleSheet.create({
         borderColor: '#ffff',
         borderWidth: 1,
         borderStyle: 'dashed',
-        borderRadius: 10
+        borderRadius: 10,
+        
 
     },
     modalView: {

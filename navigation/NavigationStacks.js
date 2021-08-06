@@ -47,8 +47,8 @@ const CalendarViewScreenNavigator = () => {
   const SearchScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="Search Bookings" component={SearchScreen} />
-        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        <Stack.Screen name="View Bookings" component={SearchScreen} />
+        <Stack.Screen name="Booking Details" component={BookingDetailsScreen} />
       </Stack.Navigator>
     );
   }

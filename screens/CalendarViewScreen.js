@@ -10,7 +10,7 @@ const CalendarViewScreen = ({navigation}) => {
         <View style={styles.containe}>
             
             <CalendarList 
-            onDayPress={() => navigation.navigate("BookingDetailsScreen")}
+            onDayPress={(day) => {alert(day.dateString)}}
 
             markingType={'multi-dot'}
             markedDates={{

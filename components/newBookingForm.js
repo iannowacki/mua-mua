@@ -39,7 +39,8 @@ export default NewBookingForm = ({addBooking}) => {
                         keyboardType='numeric'> 
                         </TextInput>
 
-                        <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/>
+                        <Button title='sumbit' color='maroon' onPress={() => alert("Be Alert!")}/>
+                        {/* <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/> */}
                     </View>
                 )}
             </Formik>
