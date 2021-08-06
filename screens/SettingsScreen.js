@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import globalStyles from '../styles/global';
 
 const SettingsScreen = ({navigation}) => {
     return(
