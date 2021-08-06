@@ -12,7 +12,7 @@ const Tabs = () => {
             <Tab.Screen name="Calendar" component={CalendarViewScreenNavigator} options={{headerShown: false}}  />
             <Tab.Screen name="Messages" component={MessengerScreenNavigator}  options={{headerShown: false}} />
             <Tab.Screen name="New Booking" component={NewBookingScreenNavigator} options={{headerShown: false}} />
-            <Tab.Screen name="Search" component={SearchScreenNavigator} options={{headerShown: false}} />
+            <Tab.Screen name="View Bookings" component={SearchScreenNavigator} options={{headerShown: false}} />
             <Tab.Screen name="Settings" component={SettingsScreenNavigator} options={{headerShown: false}} />
         </Tab.Navigator>
 
