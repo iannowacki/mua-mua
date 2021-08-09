@@ -9,7 +9,7 @@ const Props = {
 
 const TaskItem = ({item}) => {
     return(
-        <View key={item.id} style={styles.taskItem}>
+        <View style={styles.taskItem}>
             <Text>{item.name}</Text>
             <CheckBox value={!!item.completedAt}/>
         </View>

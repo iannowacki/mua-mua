@@ -6,6 +6,10 @@ import NewBookingScreen from "../screens/NewBookingScreen";
 import SearchScreen from "../screens/SearchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import MessengerScreen from "../screens/MessengerScreen";
+import CreateBooking from "../screens/CreateBooking";
+import Bookings from "../screens/Bookings";
+import { TouchableWithoutFeedback } from "react-native";
+import {Ionicons} from '@expo/vector-icons';
 
 const Stack = createStackNavigator(); 
 
@@ -36,8 +40,24 @@ const CalendarViewScreenNavigator = () => {
   const NewBookingScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="New Booking Form" component={NewBookingScreen} />
+        <Stack.Screen 
+          name="New Booking Form" 
+          component={NewBookingScreen} 
+          options={({navigation}) => ({
+            headerRight: () => (
+              <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingDetailsScreen')}>
+                <Ionicons 
+                  name={'ios-add'} 
+                  size={34} 
+                  color={'#0080ff'} 
+                  style={{marginRight: 25}} />
+              </TouchableWithoutFeedback>
+            )
+          })}
+        />
         <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        <Stack.Screen name="Create Booking" component={CreateBooking} />
+        <Stack.Screen name="Bookings" component={Bookings} />
       </Stack.Navigator>
     );
   }

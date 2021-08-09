@@ -6,6 +6,8 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import * as firebase from "firebase";
 import 'firebase/firestore';
 import Tasks from './components/Tasks';
+import Bookings from './screens/Bookings';
+import CreateTask from './components/createBookingForm';
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDKe05hQwLAZi_NmK1GwLJ0UqaOG-H2EVk",
@@ -29,12 +31,17 @@ import Tasks from './components/Tasks';
 
 const App = () => {
   return(
-    <View style={styles.container}>
-      <Tasks />
-    </View>
+    // <View style={styles.container}>
+    //   <Tasks />
+    // </View>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
+    
     // <NavigationContainer>
-    //   <Tabs />
+    //   <CreateTask />
     // </NavigationContainer>
+    
   );
 }
 

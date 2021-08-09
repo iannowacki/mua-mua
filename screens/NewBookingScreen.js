@@ -5,14 +5,15 @@ import { Formik } from 'formik';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import NewBookingForm from '../components/newBookingForm';
 import addBooking from '../screens/SearchScreen';
-import SearchScreen from './SearchScreen'
+import SearchScreen from './SearchScreen';
+import Tasks from '../components/Tasks';
 
 const NewBookingScreen = ({navigation}) => {
     
     return(
         <View style={styles.container}>
-            <NewBookingForm addBooking={SearchScreen.addBooking}/>
-            
+            {/* <NewBookingForm addBooking={SearchScreen.addBooking}/> */}
+            <Tasks />
         </View>
     );
 };
