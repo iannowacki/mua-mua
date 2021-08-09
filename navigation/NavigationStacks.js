@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import BookingDetailsScreen from "../screens/BookingDetailsScreen";
+import BookingDetailsScreen2 from "../screens/BookingDetailsScreen2";
 import CalendarViewScreen from "../screens/CalendarViewScreen";
 import NewBookingScreen from "../screens/NewBookingScreen";
 import SearchScreen from "../screens/SearchScreen";
@@ -45,7 +46,7 @@ const CalendarViewScreenNavigator = () => {
           component={NewBookingScreen} 
           options={({navigation}) => ({
             headerRight: () => (
-              <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingDetailsScreen')}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingDetailsScreen2')}>
                 <Ionicons 
                   name={'ios-add'} 
                   size={34} 
@@ -56,6 +57,7 @@ const CalendarViewScreenNavigator = () => {
           })}
         />
         <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        <Stack.Screen name="BookingDetailsScreen2" component={BookingDetailsScreen2} />
         <Stack.Screen name="Create Booking" component={CreateBooking} />
         <Stack.Screen name="Bookings" component={Bookings} />
       </Stack.Navigator>

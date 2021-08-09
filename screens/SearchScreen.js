@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, Button, StyleSheet, Modal, TouchableOpacity, TextInput} from 'react-native';
 import BookingDetailsScreen from './BookingDetailsScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import {globalStyles} from '../styles/global';
+import db, { streamTasks } from '../db/firestore';
 
 const SearchScreen = ({navigation}) => {
     const [bookings, setBookings] = useState([
@@ -26,16 +27,38 @@ const SearchScreen = ({navigation}) => {
         });
     }
 
+
+    const [tasks, setTasks ] = useState()
+
+    const mapDocToTask = (document) => {
+        return {
+            id: document.id,
+            name: document.data().name,
+            createdAt: document.data().createdAt,
+            completedAt: document.data().completedAt,
+        };
+    };
+
+    useEffect(() => {
+        streamTasks({
+            next: querySnapshot => {
+                const tasks = querySnapshot
+                .docs.map(docSnapshot => mapDocToTask(docSnapshot));
+                setTasks(tasks);
+            },
+            error: (error) => console.log(error),
+        });
+    }, [setTasks]);
     
     return(
         <View style={styles.container}>
             <FlatList
-                data={bookings}
+                data={tasks}
                 renderItem={({item}) => (
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('BookingDetailsScreen', item)}>
                         <Text style={globalStyles.bodyText}>Date: {item.weddingDate}</Text>
                         <Text style={globalStyles.bodyText}>Venue: {item.venueName}</Text>
-                        <Text style={globalStyles.bodyText}>Name: {item.bookingName}</Text>
+                        <Text style={globalStyles.bodyText}>Name: {item.name}</Text>
                     </TouchableOpacity>
 
                 )}
