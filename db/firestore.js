@@ -28,4 +28,8 @@ export const getTasks = () => {
         }))) 
 }
 
+export const streamTasks = (observer) => {
+    db.collection('tasks').onSnapshot(observer)
+}
+
 export default db;
