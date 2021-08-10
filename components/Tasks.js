@@ -19,7 +19,7 @@ const Tasks = () => {
     };
 
     useEffect(() => {
-        streamTasks({
+        const unsubscribe = streamTasks({
             next: querySnapshot => {
                 const tasks = querySnapshot
                 .docs.map(docSnapshot => mapDocToTask(docSnapshot));
@@ -27,6 +27,8 @@ const Tasks = () => {
             },
             error: (error) => console.log(error),
         });
+
+        return unsubscribe
     }, [setTasks]);
 
     return (

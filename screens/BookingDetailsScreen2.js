@@ -20,7 +20,7 @@ const CreateTask = () => {
 
     return (
         <View>
-            <Text>Mic Check one two</Text>
+            
             {/* <Formik 
               initialValues={{name: ''}}
               onSubmit={(values) => {

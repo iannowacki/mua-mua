@@ -98,15 +98,43 @@
 
 
 import React from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Button, StyleSheet, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {globalStyles} from '../styles/global';
 import CreateTask from '../components/createBookingForm';
+import { Ionicons } from '@expo/vector-icons';
+import db from '../db/firestore';
+
 
 export default function BookingDetailsScreen  ({route, navigation}) {
-    const {name, weddingDate, venueName, venuePostcode, bookingName, 
+    const {id, name, weddingDate, venueName, venuePostcode, bookingName, 
         numberOfMakeups, numberOfBrides,numberOfMothersBridesmaids, 
         juniorBridesmaids, bookingPrice} = route.params; 
+
+        React.useLayoutEffect( () => {
+            navigation.setOptions({
+                headerRight: () => (
+                    <TouchableWithoutFeedback
+                        onPress={() => {
+                            db.collection('tasks')
+                            .doc(id)
+                            .delete()
+                            .then(() => navigation.goBack())
+                        }}
+                        >
+                            <Ionicons name={'ios-trash'}
+                            size={35}
+                            style={{marginRight: 25}}
+                            color={'#0080ff'}
+                            />
+
+                        </TouchableWithoutFeedback>
+                )
+            })
+        }
+
+        )
+
     
         return <View style={styles.container}>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {name}</Text>

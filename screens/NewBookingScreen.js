@@ -13,7 +13,7 @@ const NewBookingScreen = ({navigation}) => {
     return(
         <View style={styles.container}>
             {/* <NewBookingForm addBooking={SearchScreen.addBooking}/> */}
-            <Tasks />
+            {/* <Tasks /> */}
         </View>
     );
 };

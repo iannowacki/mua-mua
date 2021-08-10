@@ -29,7 +29,9 @@ export const getTasks = () => {
 }
 
 export const streamTasks = (observer) => {
-    db.collection('tasks').onSnapshot(observer)
+    db.collection('tasks')
+    .orderBy('name', 'desc')
+    .onSnapshot(observer)
 }
 
 export default db;
