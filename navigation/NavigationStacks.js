@@ -1,14 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import BookingDetailsScreen from "../screens/BookingDetailsScreen";
-import BookingDetailsScreen2 from "../screens/BookingDetailsScreen2";
+import BookingFormScreen from "../screens/BookingFormScreen";
 import CalendarViewScreen from "../screens/CalendarViewScreen";
 import NewBookingScreen from "../screens/NewBookingScreen";
 import SearchScreen from "../screens/SearchScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import MessengerScreen from "../screens/MessengerScreen";
-import CreateBooking from "../screens/CreateBooking";
-import Bookings from "../screens/Bookings";
 import { TouchableWithoutFeedback } from "react-native";
 import {Ionicons} from '@expo/vector-icons';
 
@@ -46,20 +44,17 @@ const CalendarViewScreenNavigator = () => {
           component={NewBookingScreen} 
           options={({navigation}) => ({
             headerRight: () => (
-              <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingDetailsScreen2')}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate('BookingFormScreen')}>
                 <Ionicons 
                   name={'ios-add'} 
-                  size={34} 
+                  size={44} 
                   color={'#0080ff'} 
                   style={{marginRight: 25}} />
               </TouchableWithoutFeedback>
             )
           })}
         />
-        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
-        <Stack.Screen name="BookingDetailsScreen2" component={BookingDetailsScreen2} />
-        <Stack.Screen name="Create Booking" component={CreateBooking} />
-        <Stack.Screen name="Bookings" component={Bookings} />
+        <Stack.Screen name="BookingFormScreen" component={BookingFormScreen} />
       </Stack.Navigator>
     );
   }

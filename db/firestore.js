@@ -30,7 +30,7 @@ export const getTasks = () => {
 
 export const streamTasks = (observer) => {
     db.collection('tasks')
-    .orderBy('name', 'desc')
+    .orderBy('name', 'asc')
     .onSnapshot(observer)
 }
 

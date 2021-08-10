@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {View, Text, Button, StyleSheet, Modal, TouchableOpacity, TextInput} from 'react-native';
-import BookingDetailsScreen from './BookingDetailsScreen';
-import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import {globalStyles} from '../styles/global';
@@ -26,7 +24,6 @@ const SearchScreen = ({navigation}) => {
             return [booking, ...currentBookings];
         });
     }
-
 
     const [tasks, setTasks ] = useState()
 
@@ -60,7 +57,6 @@ const SearchScreen = ({navigation}) => {
                         <Text style={globalStyles.bodyText}>Venue: {item.venueName}</Text>
                         <Text style={globalStyles.bodyText}>Name: {item.name}</Text>
                     </TouchableOpacity>
-
                 )}
             >
             </FlatList>
@@ -92,36 +88,3 @@ const styles = StyleSheet.create({
         
     }
 });
-
-
-// const SearchScreen = ({navigation}) => {
-//     const [modalOpen, setModalOpen] = useState(false);
-//     return(
-//         <View style={styles.container}>
-//             <Modal visible={modalOpen} animationType='slide'>
-//                 <View style={styles.modalView}>
-//                     <Text>Date</Text>
-//                     <MaterialIcons
-//                     name='close'
-//                     size={24}
-//                     onPress={() => setModalOpen(false)}
-//                     />
-//                 </View>
-                
-//             </Modal>
-//             <MaterialIcons
-//                 name='add'
-//                 size={24}
-//                 onPress={() => setModalOpen(true)}
-//             />
-//             <Text>Search Screen</Text>
-//             <Button
-//                 title="Click Here"
-//                 onPress={() => navigation.navigate("BookingDetailsScreen")}
-//             />
-//         </View>
-//     );
-// };
-
-
-// export default SearchScreen;

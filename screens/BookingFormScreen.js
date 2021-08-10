@@ -1,20 +1,37 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TextInput} from 'react-native';
+import React from 'react';
+import { TextInput, View, Button, Text } from 'react-native';
+import { Formik, validateYupSchema } from 'formik';
+import db from '../db/firestore';
+import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '../styles/global';
-import { Formik } from 'formik';
-import SearchScreen from '../screens/SearchScreen.js';
-import addBooking from '../screens/SearchScreen';
 
-export default NewBookingForm = ({addBooking}) => {
-    
-    return(
-        <View style={styles.container}>
+const FormProps = {
+    name: String
+}
+
+const CreateBooking = () => {
+
+    const navigation = useNavigation()
+
+    const validationSchema = yup.object().shape({
+        name: yup.string().required(),
+    })
+
+    return (
+        <View>
+            
+            
             < Formik
                 initialValues={{weddingDate: '', venuePostcode: '', numberOfMakeups: ''}}
                 onSubmit={(values) => {
-                    SearchScreen.addBooking(values);
-                    console.log(values);
-                }}
+                    db.collection('tasks').add({
+                        name: values.weddingDate,
+                        createdAt: new Date(),
+                        completedAt: null,
+                    }).then(result => navigation.goBack())
+                      .catch(err => console.log(err))
+                  }}
             >
                 
                 {(formikProps) => (
@@ -39,23 +56,15 @@ export default NewBookingForm = ({addBooking}) => {
                         keyboardType='numeric'> 
                         </TextInput>
 
-                        {/* <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/> */}
-                        <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/>
+                        <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/>
+                        {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
                     </View>
                 )}
             </Formik>
         </View>
-      
-    );
-};
+    )
+}
+
+export default CreateBooking
 
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#8fcddd'
-    },
-});
