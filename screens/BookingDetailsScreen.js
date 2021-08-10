@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import {globalStyles} from '../styles/global';
+//import CreateTask from '../components/createBookingForm';
 import { Ionicons } from '@expo/vector-icons';
 import db from '../db/firestore';
 
@@ -15,7 +17,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                 headerRight: () => (
                     <TouchableWithoutFeedback
                         onPress={() => {
-                            db.collection('tasks')
+                            db.collection('bookings')
                             .doc(id)
                             .delete()
                             .then(() => navigation.goBack())
@@ -36,7 +38,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
 
     
         return <View style={styles.container}>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {name}</Text>
+          
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Postcode:               {venuePostcode}</Text>

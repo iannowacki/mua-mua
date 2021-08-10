@@ -16,7 +16,7 @@ const MessengerScreenNavigator = () => {
   return (
     <Stack.Navigator >
       <Stack.Screen name="Messenger" component={MessengerScreen} options={{headerShown: true}}/>
-      <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+      {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
     </Stack.Navigator>
   );
 }
@@ -29,7 +29,7 @@ const CalendarViewScreenNavigator = () => {
     return (
       <Stack.Navigator >
         <Stack.Screen name="Calendar View" component={CalendarViewScreen} />
-        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
       </Stack.Navigator>
     );
   }
@@ -40,7 +40,7 @@ const CalendarViewScreenNavigator = () => {
     return (
       <Stack.Navigator >
         <Stack.Screen 
-          name="New Booking Form" 
+          name="Start a new booking here..." 
           component={NewBookingScreen} 
           options={({navigation}) => ({
             headerRight: () => (
@@ -64,7 +64,7 @@ const CalendarViewScreenNavigator = () => {
   const SearchScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="Search Bookings" component={SearchScreen} />
+        <Stack.Screen name="View all Bookings" component={SearchScreen} />
         <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
       </Stack.Navigator>
     );
@@ -76,7 +76,7 @@ const CalendarViewScreenNavigator = () => {
     return (
       <Stack.Navigator >
         <Stack.Screen name="Settings Page" component={SettingsScreen} />
-        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
       </Stack.Navigator>
     );
   }

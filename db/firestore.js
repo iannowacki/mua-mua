@@ -15,21 +15,9 @@ firebase.initializeApp(configuration)
 
 const db = firebase.firestore();
 
-export const getTasks = () => {
-    return db.collection('tasks')
-        .get()
-        .then(result => result.docs)
-        .then(docs => docs.map(doc => ({
-            id: doc.id,
-            name: doc.data().name,
-            createdAt: doc.data().createdAt,
-            completedAt: doc.data().completedAt
-            
-        }))) 
-}
 
-export const streamTasks = (observer) => {
-    db.collection('tasks')
+export const streamBookings = (observer) => {
+    db.collection('bookings')
     .orderBy('name', 'asc')
     .onSnapshot(observer)
 }

@@ -13,5 +13,19 @@ export const globalStyles = StyleSheet.create({
         padding: 15,
         fontSize: 24,
         borderRadius: 6,
+    },
+    modalView: {
+        padding: 30,
+        
+    },
+    modalToggle:{
+        marginBottom: 6,
+        marginTop: 40,
+        borderWidth: 2,
+        borderColor: 'maroon',
+        color: 'maroon',
+        padding: 12,
+        borderRadius: 4,
+        alignSelf: 'center',
     }
 });
