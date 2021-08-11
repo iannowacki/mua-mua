@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
     return(
         <Tab.Navigator
+        initialRouteName={'New Booking'}
         screenOptions={({route}) => ({
             headerTitle: () => <Text>Header</Text>,
             tabBarIcon: ({focused, color, size, padding}) => {

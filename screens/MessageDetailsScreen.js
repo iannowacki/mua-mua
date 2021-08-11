@@ -44,7 +44,7 @@ export default function MessageDetailsScreen  ({route, navigation}) {
         return <ScrollView >
             
             <View style={styles.container}>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}>From: System</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}>From: System Notifitions</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}> {createdAt}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}>Subject: New booking notification</Text>
     <Text style={[globalStyles.bodyText, {paddingBottom: 40, padding: 10}]}>Congratulations, you have been booked for the {weddingDate} at {venueName}. You can view details of this booking below and you can see it in your calendar view too.</Text>

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { TextInput, View, Button, Text, Modal, StyleSheet, ScrollView } from 'react-native';
+import { TextInput, View, Button, Text, Modal, StyleSheet, ScrollView, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Formik, validateYupSchema } from 'formik';
 import db, {streamBookings} from '../db/firestore';
+
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '../styles/global';
@@ -16,38 +17,54 @@ const CreateBooking = () => {
 
     
 
-    // const [bookings, setBookings ] = useState('')
+    const [bookings, setBookings ] = useState('')
 
-    // const mapDocToBooking = (document) => {
-    //     return {
-    //         id: document.id,
-    //         name: document.data().name,
-    //         createdAt: document.data().createdAt,
-    //         weddingDate: document.data().weddingDate,
-    //         venueName: document.data().venueName,
-    //         numberOfMakeups: document.data().numberOfMakeups,
-    //         bookingName: document.data().bookingName,
-    //         venuePostcode: document.data().venuePostcode,
-    //         numberOfBrides: document.data().numberOfBrides,
-    //         numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
-    //         juniorBridesmaids: document.data().juniorBridesmaids,
+    const mapDocToBooking = (document) => {
+        return {
+            id: document.id,
+            name: document.data().name,
+            createdAt: document.data().createdAt,
+            weddingDate: document.data().weddingDate,
+            venueName: document.data().venueName,
+            numberOfMakeups: document.data().numberOfMakeups,
+            bookingName: document.data().bookingName,
+            venuePostcode: document.data().venuePostcode,
+            numberOfBrides: document.data().numberOfBrides,
+            numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
+            juniorBridesmaids: document.data().juniorBridesmaids,
 
-    //     };
-    // };
+            juniorBridesmaidPrice: document.data().juniorBridesmaidPrice,
+            bridesmaidMOBPrice: document.data().bridesmaidMOBPrice,
+            bridePrice: document.data().bridePrice,
+            maxMiles: document.data().maxMiles,
+            maxMakeups: document.data().maxMakeups,
 
-    // useEffect(() => {
-    //     const unsubscribe = streamBookings({
-    //         next: querySnapshot => {
-    //             const bookings = querySnapshot
-    //             .docs.map(docSnapshot => mapDocToBooking(docSnapshot));
-    //             setBookings(bookings);
-    //         },
-    //         error: (error) => console.log(error),
-    //     });
-    //     return unsubscribe
-    // }, [setBookings]);
+
+        };
+    };
+
+    useEffect(() => {
+        const unsubscribe = streamBookings({
+            next: querySnapshot => {
+                const bookings = querySnapshot
+                .docs.map(docSnapshot => mapDocToBooking(docSnapshot));
+                setBookings(bookings);
+            },
+            error: (error) => console.log(error),
+        });
+        return unsubscribe
+    }, [setBookings]);
+
+    // const settingsFile = {};
     
-
+    // const search = (nameKey, bookings) => {
+    //     for (let i=0; i < bookings.length; i++) {
+    //         if (bookings[i].id == nameKey) {
+    //             settingsFile = bookings[i];
+    //             return myArray[i];
+    //         }
+    //     }
+    // }
 
     const navigation = useNavigation()
 
@@ -60,13 +77,41 @@ const CreateBooking = () => {
     return (
         <View>
             
-            <Text>        Current Settings:</Text>
-    <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
             
+            <View style={{height: 370}}>
+                
+                <FlatList
+                    scrollEnabled={false}
+                    data={bookings}
+                    renderItem={({item}) => (
+                        
+                        <TouchableOpacity style={styles.flatListItem} >
+                            <Text style={globalStyles.bodyTextDark}>Current Settings:</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}>Max Makeups:    {item.maxMakeups}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Max Miles:    {item.maxMiles}</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}>Bride Price:    {item.bridePrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Bridesmaid Price:    {item.bridesmaidMOBPrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Junior Price:    {item.juniorBridesmaidPrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                        </TouchableOpacity>
+                        
+                    )}
+                >
+                </FlatList>
+                
+            </View>
+            <View >
             < Formik
                 initialValues={{maxMakeups:'', 
                                 maxMiles:'', 
@@ -83,7 +128,7 @@ const CreateBooking = () => {
                         bridePrice: values.bridePrice,
                         maxMiles: values.maxMiles,
                         maxMakeups: values.maxMakeups,
-                        //name: values.name,
+                        name: values.name,
                         createdAt: new Date(),
                     })
                     .then(setModalOpen(false))
@@ -106,6 +151,7 @@ const CreateBooking = () => {
                         placeholder='Max miles travel'
                         onChangeText={formikProps.handleChange('maxMiles')}
                         value={formikProps.values.maxMiles}
+                        keyboardType='numeric'
                         >
                         </TextInput>
 
@@ -113,6 +159,7 @@ const CreateBooking = () => {
                         placeholder='Max makeups per booking'
                         onChangeText={formikProps.handleChange('maxMakeups')}
                         value={formikProps.values.maxMakeups}
+                        keyboardType='numeric'
                         >
                         </TextInput>
 
@@ -120,6 +167,7 @@ const CreateBooking = () => {
                         placeholder='Price for bride'
                         onChangeText={formikProps.handleChange('bridePrice')}
                         value={formikProps.values.bridePrice}
+                        keyboardType='numeric'
                         > 
                         </TextInput>
 
@@ -127,6 +175,7 @@ const CreateBooking = () => {
                         placeholder='Bridesmaid/MOB price'
                         onChangeText={formikProps.handleChange('bridesmaidMOBPrice')}
                         value={formikProps.values.bridesmaidMOBPrice}
+                        keyboardType='numeric'
                         > 
                         </TextInput>
 
@@ -134,6 +183,7 @@ const CreateBooking = () => {
                         placeholder='Price for junior bridesmaid'
                         onChangeText={formikProps.handleChange('juniorBridesmaidPrice')}
                         value={formikProps.values.juniorBridesmaidPrice}
+                        keyboardType='numeric'
                         > 
                         </TextInput>
 
@@ -150,6 +200,7 @@ const CreateBooking = () => {
                     </View>
                 )}
             </Formik>
+            </View>
         </View>
     )
 }

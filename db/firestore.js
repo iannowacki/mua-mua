@@ -18,10 +18,10 @@ const db = firebase.firestore();
 
 export const streamBookings = (observer) => {
     db.collection('bookings')
-    .orderBy('name', 'asc')
+    .orderBy('name', 'desc')
     .onSnapshot(observer)
 }
 
-
-
 export default db;
+
+

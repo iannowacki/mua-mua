@@ -1,28 +1,4 @@
-// import React from 'react';
-// import {View, Text, Button, StyleSheet} from 'react-native';
 
-// const MessengerScreen = ({navigation}) => {
-//     return(
-//         <View style={styles.container}>
-//             <Text>Messenger Screen</Text>
-//             <Button
-//                 title="Click Here"
-//                 onPress={() => alert('Button Clicked!')}
-//             />
-//         </View>
-//     );
-// };
-
-// export default MessengerScreen;
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         backgroundColor: '#8fcddd'
-//     },
-// });
 import React, { useEffect, useState } from 'react';
 import {View, Text, Button, StyleSheet, Modal, TouchableOpacity, TextInput} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -50,6 +26,12 @@ const MessengerScreen = ({navigation}) => {
             numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
             juniorBridesmaids: document.data().juniorBridesmaids,
             createdAt: document.data().createdAt,
+
+            juniorBridesmaidPrice: document.data().juniorBridesmaidPrice,
+            bridesmaidMOBPrice: document.data().bridesmaidMOBPrice,
+            bridePrice: document.data().bridePrice,
+            maxMiles: document.data().maxMiles,
+            maxMakeups: document.data().maxMakeups,
 
         };
     };

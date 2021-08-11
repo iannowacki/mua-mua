@@ -45,7 +45,7 @@ const SearchScreen = ({navigation}) => {
                 data={bookings}
                 renderItem={({item}) => (
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('BookingDetailsScreen', item)}>
-                        <Text style={globalStyles.bodyText}>Date: {item.weddingDate}</Text>
+                        <Text style={globalStyles.bodyTextDark}>Date: {item.weddingDate}</Text>
                         <Text style={globalStyles.bodyText}>Venue: {item.venueName}</Text>
                         <Text style={globalStyles.bodyText}>Name: {item.bookingName}</Text>
                         <Text style={globalStyles.bodyText}>Makeups: {item.numberOfMakeups}</Text>
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
         borderColor: '#ffff',
         borderWidth: 1,
         borderStyle: 'dashed',
-        borderRadius: 10
+        borderRadius: 10,
+        
 
     },
     modalView: {

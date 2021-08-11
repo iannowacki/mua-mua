@@ -7,6 +7,12 @@ export const globalStyles = StyleSheet.create({
         color: '#FFFFFF',
 
     },
+    bodyTextDark: {
+        
+        fontSize: 30,
+        color: '#333333',
+
+    },
     newBookForm: {
         borderWidth: 2,
         borderColor: '#eee',

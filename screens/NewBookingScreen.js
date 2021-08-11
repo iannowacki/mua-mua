@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TextInput} from 'react-native';
+import React, {useState, Component} from 'react';
+import {View, Text, Button, StyleSheet, TextInput, ImageBackground} from 'react-native';
 import { globalStyles } from '../styles/global';
 
+//const backgroundImage = require("../assets/bookin-image.png");
+const staticImage = require("../assets/booking-image.png");
 
 const NewBookingScreen = ({navigation}) => {
     
+    
     return(
         <View style={styles.container}>
-            <Text>Click up there to start a new booking!</Text>
+            <ImageBackground source={staticImage} style={styles.ImageBackground}/>
+            
         </View>
     );
 };
@@ -21,4 +25,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#8fcddd'
     },
+    ImageBackground: {
+        flex: 1,
+        resizeMode: "cover",
+        width: "100%",
+        alignItems: "center",
+      },
 });
