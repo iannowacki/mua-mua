@@ -129,7 +129,7 @@ const CreateBooking = () => {
                         maxMiles: values.maxMiles,
                         maxMakeups: values.maxMakeups,
                         name: values.name,
-                        createdAt: new Date(),
+                        createdAt: new Date().toString(),
                     })
                     .then(setModalOpen(false))
                       .catch(err => console.log(err))
