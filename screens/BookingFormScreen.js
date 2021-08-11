@@ -55,7 +55,7 @@ const CreateBooking = () => {
                         bookingPrice: values.bookingPrice,
                         venueName: values.venueName,
                         name: values.name,
-                        createdAt: new Date(),
+                        createdAt: new Date().toString(),
                     }).then(result => navigation.goBack())
                       .catch(err => console.log(err))
                   }}

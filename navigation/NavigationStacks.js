@@ -5,6 +5,8 @@ import BookingFormScreen from "../screens/BookingFormScreen";
 import CalendarViewScreen from "../screens/CalendarViewScreen";
 import NewBookingScreen from "../screens/NewBookingScreen";
 import SearchScreen from "../screens/SearchScreen";
+import MessageDetailsScreen from "../screens/MessageDetailsScreen";
+
 import SettingsScreen from "../screens/SettingsScreen";
 import MessengerScreen from "../screens/MessengerScreen";
 import { TouchableWithoutFeedback } from "react-native";
@@ -16,7 +18,8 @@ const MessengerScreenNavigator = () => {
   return (
     <Stack.Navigator >
       <Stack.Screen name="Messenger" component={MessengerScreen} options={{headerShown: true}}/>
-      {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
+      
+      <Stack.Screen name="MessageDetailsScreen" component={MessageDetailsScreen} />
     </Stack.Navigator>
   );
 }

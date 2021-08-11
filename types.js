@@ -3,6 +3,6 @@
 export const TaskType = {
     id: String,
     name: String,
-    createdAt: Date,
+    createdAt: String,
     completedAt: Date
 }

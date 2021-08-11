@@ -22,4 +22,6 @@ export const streamBookings = (observer) => {
     .onSnapshot(observer)
 }
 
+
+
 export default db;

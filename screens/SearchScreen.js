@@ -6,24 +6,7 @@ import {globalStyles} from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
 
 const SearchScreen = ({navigation}) => {
-    // const [bookings, setDummyBookings] = useState([
-    //     {weddingDate: '2021-08-14', venueName: 'Brig o doon', venuePostcode: 'G81 2AZ', bookingName: 'Senga McLauchlin', numberOfMakeups: 6, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 1, flowerGirls: 1, bookingPrice: 250, key: '2021-08-14'},
-    //     {weddingDate: '2021-08-15', venueName: 'Lodge on the Loch', venuePostcode: 'G82 4JF', bookingName: 'Sinead Maguire', numberOfMakeups: 4, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 250, key: '2021-08-15'},
-    //     {weddingDate: '2021-08-18', venueName: 'Planet Hollywood', venuePostcode: 'X11 0OO', bookingName: 'Gloria Shepherd', numberOfMakeups: 4, numberOfBrides: 2, numberOfMothersBridesmaids: 2, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 500, key: '2021-08-18'},
-    //     {weddingDate: '2021-08-20', venueName: 'Brig o doon', venuePostcode: 'G81 2AZ', bookingName: 'Senga McLauchlin', numberOfMakeups: 6, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 1, flowerGirls: 1, bookingPrice: 250, key: '4'},
-    //     {weddingDate: '2021-08-23', venueName: 'Lodge on the Loch', venuePostcode: 'G82 4JF', bookingName: 'Stacey Mollock', numberOfMakeups: 4, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 250, key: '5'},
-    //     {weddingDate: '2021-08-24', venueName: 'Planet Hollywood', venuePostcode: 'X11 0OO', bookingName: 'Claire Thomson', numberOfMakeups: 4, numberOfBrides: 2, numberOfMothersBridesmaids: 2, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 500, key: '6'},
-    //     {weddingDate: '2021-08-27', venueName: 'Brig o doon', venuePostcode: 'G81 2AZ', bookingName: 'Sam Jones', numberOfMakeups: 6, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 1, flowerGirls: 1, bookingPrice: 250, key: '7'},
-    //     {weddingDate: '2021-08-28', venueName: 'Lodge on the Loch', venuePostcode: 'G82 4JF', bookingName: 'Mia Farley', numberOfMakeups: 4, numberOfBrides: 1, numberOfMothersBridesmaids: 3, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 250, key: '8'},
-    //     {weddingDate: '2021-08-29', venueName: 'Planet Hollywood', venuePostcode: 'X11 0OO', bookingName: 'Agnes Boyd', numberOfMakeups: 4, numberOfBrides: 2, numberOfMothersBridesmaids: 2, juniorBridesmaids: 0, flowerGirls: 0, bookingPrice: 500, key: '9'},
-    // ]);
 
-    // const addBooking = (booking) => {
-    //     booking.key = booking.weddingDate;
-    //     setDummyBookings((currentBookings) => {
-    //         return [booking, ...currentBookings];
-    //     });
-    // }
 
     const [bookings, setBookings ] = useState()
 
@@ -82,7 +65,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#8fceee'
+        backgroundColor: '#CBAACB'
     },
     flatListItem:{
         padding: 16,
