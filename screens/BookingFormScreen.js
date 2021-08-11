@@ -89,7 +89,7 @@ const CreateBooking = () => {
                         {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
                        
                         <Modal visible={modalOpen} animationType='slide' propagateSwipe={true}>
-                        <ScrollView style={{padding:30}}>
+                        <ScrollView style={{padding:10}}>
                             
                             <MaterialIcons
                                 name='close'

@@ -274,3 +274,61 @@
             
 //         }))) 
 // }
+
+// const user = await firestore().collection('bookings').doc('ABC').get();
+
+    // const settingFile = db.collection('bookings').doc("dXXA92fD3hBOn3dM9KFE").get();
+
+    // const [settings, setSettings ] = useState()
+
+    // const mapDocToSetting = (document) => {
+    //     return {
+    //         id: document.id,
+    //         maxMakeups: document.data().maxMakeups,
+    //         maxMiles: document.data().maxMiles,
+    //         bridePrice: document.data().bridePrice,
+    //         bridesmaidMOBPrice: document.data().bridesmaidMOBPrice,
+    //         juniorBridesmaidPrice: document.data().juniorBridesmaidPrice,
+    //     };
+    // };
+
+    // useEffect(() => {
+    //     const unsubscribe = streamBookings({
+    //         next: querySnapshot => {
+    //             const bookings = querySnapshot
+    //             .docs.map(docSnapshot => mapDocToSetting(docSnapshot));
+    //             setSettings(bookings);
+    //         },
+    //         error: (error) => console.log(error),
+    //     });
+    //     return unsubscribe
+    // }, [setSettings]);
+
+
+
+    // const docRef = db.collection("bookings").doc("dXXA92fD3hBOn3dM9KFE");
+
+    // const [store, setStore] = useState()
+    // const [loading, setLoading] = useState(true) // show a loading spinner instead of store data until it's available
+  
+    // useEffect(() => {
+
+    
+  
+    //   const fetchQuery = async () => {
+    //     const storeData = await db
+    //       .collection('bookings')
+    //       .doc('dXXA92fD3hBOn3dM9KFE')
+    //       .get() // this queries the database
+  
+    //       if (storeData) {
+    //         setStore(storeData) // save the data to store state
+    //         setLoading(false) // set loading to false 
+    //       } else {
+    //         // something went wrong, show an error message or something
+    //       }
+    //   }
+  
+    //   fetchQuery()
+  
+    // }, ['dXXA92fD3hBOn3dM9KFE'])

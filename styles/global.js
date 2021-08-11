@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
     newBookForm: {
         borderWidth: 2,
         borderColor: '#eee',
-        padding: 15,
+        padding: 10,
         fontSize: 24,
         borderRadius: 6,
     },
@@ -20,7 +20,7 @@ export const globalStyles = StyleSheet.create({
     },
     modalToggle:{
         marginBottom: 6,
-        marginTop: 40,
+        marginTop: 30,
         borderWidth: 2,
         borderColor: 'maroon',
         color: 'maroon',
