@@ -83,7 +83,14 @@ const CreateBooking = () => {
                         value={formikProps.values.numberOfMakeups}
                         keyboardType='numeric'> 
                         </TextInput>
-                        <Button title='check' color='maroon' onPress={()=> setModalOpen(true)} />
+                        {/* <Button title='check' color='maroon' onPress={()=> setModalOpen(true)} /> */}
+                        <Button title='check' color='maroon' onPress={() => {
+                            if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                                setModalOpen(true);
+                            } else {
+                            alert('Sorry, minimum 4 makeups for wedding booking');
+                            } }}
+                            />
                         
                         
                         {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
@@ -112,7 +119,7 @@ const CreateBooking = () => {
                                 placeholder='Booking Name'
                                 onChangeText={formikProps.handleChange('bookingName')}
                                 value={formikProps.values.bookingName}
-                                keyboardType='numeric'> 
+                                > 
                                 </TextInput>
 
                                 <TextInput style={globalStyles.newBookForm} 
@@ -178,11 +185,12 @@ const styles = StyleSheet.create({
     modalToggle:{
         marginBottom: 6,
         marginTop: 40,
+        marginRight: 5,
         borderWidth: 2,
         borderColor: 'maroon',
         color: 'maroon',
-        padding: 12,
+        padding: 6,
         borderRadius: 4,
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
     }
 })

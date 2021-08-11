@@ -12,6 +12,10 @@ export default function BookingDetailsScreen  ({route, navigation}) {
         numberOfMakeups, numberOfBrides,numberOfMothersBridesmaids, 
         juniorBridesmaids, bookingPrice} = route.params; 
 
+        const bridePrice = 80;
+        const mobPrice = 60;
+        const juniorPrice = 40;
+
         React.useLayoutEffect( () => {
             navigation.setOptions({
                 headerRight: () => (
@@ -47,7 +51,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>MOBS/Bridesmaids:               {numberOfMothersBridesmaids}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Junior Bridesmaids:                {juniorBridesmaids}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:                     {bookingPrice}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{((parseInt(numberOfBrides)*bridePrice))+(parseInt(numberOfMothersBridesmaids)*mobPrice)+(parseInt(juniorBridesmaids)*juniorPrice)}</Text>
             
         </View>
     
