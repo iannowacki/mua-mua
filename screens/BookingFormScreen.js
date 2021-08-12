@@ -39,6 +39,8 @@ const CreateBooking = () => {
     const [juniorBridesmaidPrice, setJuniorBridesmaidPrice] = useState(0); 
     const [maxMakeups, setMaxMakeups] = useState(1); 
 
+    const [numberOfMakeups, setNumberOfMakeups] = useState(0); 
+
     const [calculatedPrice, setCalculatedPrice ] = useState(0);
     
     
@@ -230,6 +232,7 @@ const CreateBooking = () => {
                             setSelectedDate(formikProps.values.weddingDate)
                             setButton1Height(1)
                             setButton2Height(40)
+                            setNumberOfMakeups(formikProps.values.numberOfMakeups)
 
 
 
@@ -243,19 +246,23 @@ const CreateBooking = () => {
                             setSelectedDate(formikProps.values.weddingDate)
                             setButton1Height(40)
                             setButton2Height(1)
+
+                            setNumberOfMakeups(formikProps.values.numberOfMakeups)
+                            console.log(formikProps.values.numberOfMakeups)
+                            console.log('numbr of makeups: ' + numberOfMakeups)
                             
-                            setModalOpen(true);
+                            
 
                             
-                            if(parseInt(formikProps.values.numberOfMakeups) < 3 ){
-                                alert('Sorry, minimum 4 makeups for wedding booking')
-
-                            }
+                            
                             if(bookingNameValue){
                                 alert('sorry but this date is booked, please try another')
                             }
-                            
-                            if(!bookingNameValue){
+                            else if (numberOfMakeups < 3){
+                                alert('does not meet minimum makeups')
+
+                            }
+                            else if(!bookingNameValue && parseInt(formikProps.values.numberOfMakeups) > 3 ){
                                 setModalOpen(true);
                             }
                             
