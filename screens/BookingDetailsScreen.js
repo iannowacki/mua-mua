@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useHooks} from 'react';
 import {View, Text, Button, StyleSheet, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {globalStyles} from '../styles/global';
@@ -15,6 +15,8 @@ export default function BookingDetailsScreen  ({route, navigation}) {
         const bridePrice = 80;
         const mobPrice = 60;
         const juniorPrice = 40;
+
+        
 
         React.useLayoutEffect( () => {
             navigation.setOptions({

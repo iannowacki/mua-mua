@@ -4,18 +4,44 @@ import { Calendar, CalendarList } from 'react-native-calendars';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
+import { withRepeat } from 'react-native-reanimated';
 
-
+Object.byString = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1'); 
+    s = s.replace(/^\./, '');           
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
+}
 
 const CalendarViewScreen = ({navigation}) => {
+
+function bookMarkingsPopulate(){  
+        const reduced = bookings.reduce((acc, currentItem) => {
+            const {weddingDate, ...details} = currentItem;
+            acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
+            };
+        
+            return acc;
+            },{});
+            setItems(reduced);
+            
+        };
 
     const [items, setItems] = useState({
         // '2021-09-04': [{}],
         // '2021-09-11': [{}],
         '2021-09-18': {dots: [notAvailable], selected: false},
-        '2021-09-25': {dots: [massage, workout], disabled: true}
+     
     });
-    const [bookings, setBookings ] = useState()
+    const [bookings, setBookings ] = useState('')
 
     const mapDocToBooking = (document) => {
         return {
@@ -47,9 +73,24 @@ const CalendarViewScreen = ({navigation}) => {
         
         return unsubscribe
     }, [setBookings]);
-    
 
     
+
+    useEffect(()=>{
+       
+        try{
+            bookMarkingsPopulate();
+        }
+        catch(err){
+            console.log(err.message)
+        }
+        
+    }, [bookings])
+
+    
+
+
+    let str = '';
 
     const notAvailable = {key: 'notAvailable', color: 'red'};
     const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
@@ -58,24 +99,16 @@ const CalendarViewScreen = ({navigation}) => {
     const [selectedDate, setSelectedDate] = useState(''); 
 
     
+
+
     return(
         
         <View style={styles.containe}>
             
-            <Button title={'Press to reduce'} onPress={() => {
-                const reduced = bookings.reduce((acc, currentItem) => {
-                const {weddingDate, ...details} = currentItem;
-                acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
-                };
-                // acc[new Date(weddingDate)] = [{marked: true, dotColor: 'red'}];
-                return acc;
-                },{});
-                setItems(reduced);
-                console.log(items);
-            }}/>
+            {/* <Button title={'Press to reduce'} onPress={() => bookMarkingsPopulate()}/> */}
             
             <CalendarList 
-            onDayPress={(day) => {setModalOpen(true); setSelectedDate(day.dateString) }}
+            onDayPress={(day) => {setModalOpen(true); setSelectedDate(day.dateString);  }}
 
             markingType={'dot'}
             markedDates={items} 
@@ -92,11 +125,22 @@ const CalendarViewScreen = ({navigation}) => {
                             />
                 </View>
                 <View>
-                    <Text></Text>
+                    
+                    
+                    
                     <Text style={{fontSize:24}}>                    {selectedDate}</Text>
-                    {/* <Text>{}</Text> */}
+                    <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
+                    <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
+                    <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
+                    <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
+                    <Text>Venue:      {Object.byString(items, venueNameText )}</Text>
+                    <Text>Booking Name:      {Object.byString(items, bookingNameText )}</Text>
+                    <Text>Venue Postcode:      {Object.byString(items, postcodeText )}</Text>
+                    <Text>Number of Makeups:      {Object.byString(items, numberOfMakeupsText )}</Text>
+                    
                 </View>
             </Modal>
+            
         </View>
     );
 };
