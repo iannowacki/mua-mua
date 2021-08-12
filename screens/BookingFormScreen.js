@@ -1,30 +1,142 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { TextInput, View, Button, Text, Modal, StyleSheet, ScrollView } from 'react-native';
 import { Formik, validateYupSchema } from 'formik';
-import db from '../db/firestore';
+import db, {streamBookings} from '../db/firestore';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
+Object.byString = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1'); 
+    s = s.replace(/^\./, '');           
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
+}
+
+
+
 const FormProps = {
     name: String
 }
-
 const CreateBooking = () => {
 
+
+    function bookMarkingsPopulate(){  
+        const reduced = bookings.reduce((acc, currentItem) => {
+            const {weddingDate, ...details} = currentItem;
+            acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
+            };
+        
+            return acc;
+            },{});
+            setItems(reduced);
+            
+        };
+
+    const [items, setItems] = useState({
+        // '2021-09-04': [{}],
+        // '2021-09-11': [{}],
+        '2021-09-18': {dots: [notAvailable], selected: false},
+     
+    });
+    const [bookings, setBookings ] = useState('')
+
+    const mapDocToBooking = (document) => {
+        return {
+            id: document.id,
+            name: document.data().name,
+            createdAt: document.data().createdAt,
+            weddingDate: document.data().weddingDate,
+            venueName: document.data().venueName,
+            numberOfMakeups: document.data().numberOfMakeups,
+            bookingName: document.data().bookingName,
+            venuePostcode: document.data().venuePostcode,
+            numberOfBrides: document.data().numberOfBrides,
+            numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
+            juniorBridesmaids: document.data().juniorBridesmaids,
+
+            juniorBridesmaidPrice: document.data().juniorBridesmaidPrice,
+            bridesmaidMOBPrice: document.data().bridesmaidMOBPrice,
+            bridePrice: document.data().bridePrice,
+            maxMiles: document.data().maxMiles,
+            maxMakeups: document.data().maxMakeups,
+
+        };
+    };
+
+    useEffect(() => {
+        const unsubscribe = streamBookings({
+            next: querySnapshot => {
+                const bookings = querySnapshot
+                .docs.map(docSnapshot => mapDocToBooking(docSnapshot));
+                setBookings(bookings);
+            },
+            error: (error) => console.log(error),
+        });
+        return unsubscribe
+    }, [setBookings]);
+
+
+    useEffect(()=>{
+       
+        try{
+            bookMarkingsPopulate();
+            setSelectedDate('2021-09-23')
+        }
+        catch(err){
+            console.log(err.message)
+        }
+        
+    }, [bookings])
+
+    let str = '';
+
+
+    const notAvailable = {key: 'notAvailable', color: 'red'};
+    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    const workout = {key: 'workout', color: 'green'};
+    
+    const [selectedDate, setSelectedDate] = useState(''); 
+
+
+
+
+
+
     const navigation = useNavigation()
-
     const [modalOpen, setModalOpen] = useState(false) 
-
     const validationSchema = yup.object().shape({
         name: yup.string().required(),
     })
-
     return (
         <View>
-            
+            <View>
+                {/* <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} /> */}
+                <View>                  
+                    <View style={{height: 1}}>
+                    <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                    <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                    <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                    <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                    <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                    </View>
+                    <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
+                    <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
+                    <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
+                    <Text>Max no. of Makeups:      {Object.byString(items, maxMakeupsText )}</Text>
+                </View>
+            </View>
             
             < Formik
                 initialValues={{weddingDate: '', 

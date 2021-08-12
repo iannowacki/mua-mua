@@ -6,6 +6,12 @@ import { globalStyles } from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
 import { withRepeat } from 'react-native-reanimated';
 
+/**
+ * Search function to access fields in nested objects
+ * 
+ * @param {*} o - Nested object to look for data in
+ * @param {*} s - String name of 
+ */
 Object.byString = function(o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); 
     s = s.replace(/^\./, '');           
@@ -69,12 +75,9 @@ function bookMarkingsPopulate(){
             },
             error: (error) => console.log(error),
         });
-
-        
         return unsubscribe
     }, [setBookings]);
 
-    
 
     useEffect(()=>{
        
@@ -87,20 +90,17 @@ function bookMarkingsPopulate(){
         
     }, [bookings])
 
-    
-
-
     let str = '';
+
 
     const notAvailable = {key: 'notAvailable', color: 'red'};
     const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key: 'workout', color: 'green'};
-    const [modalOpen, setModalOpen] = useState(false);
+    
     const [selectedDate, setSelectedDate] = useState(''); 
-
     
 
-
+    const [modalOpen, setModalOpen] = useState(false);
     return(
         
         <View style={styles.containe}>
@@ -127,12 +127,13 @@ function bookMarkingsPopulate(){
                 <View>
                     
                     
-                    
+                    <View style={{height: 1}}>
                     <Text style={{fontSize:24}}>                    {selectedDate}</Text>
                     <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
                     <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
                     <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
+                    </View>
                     <Text>Venue:      {Object.byString(items, venueNameText )}</Text>
                     <Text>Booking Name:      {Object.byString(items, bookingNameText )}</Text>
                     <Text>Venue Postcode:      {Object.byString(items, postcodeText )}</Text>

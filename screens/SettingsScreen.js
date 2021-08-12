@@ -121,8 +121,8 @@ const CreateBooking = () => {
                                 name: '', 
                                 }}
                 onSubmit={(values) => {
-                    db.collection('bookings').doc('settingsDocument').set({
-                        id: 'userSettings',
+                    db.collection('bookings').doc('hBJWmd4bnppoxmL5WsS7').set({
+                        id: 'hBJWmd4bnppoxmL5WsS7',
                         juniorBridesmaidPrice: values.juniorBridesmaidPrice,
                         bridesmaidMOBPrice: values.bridesmaidMOBPrice,
                         bridePrice: values.bridePrice,
@@ -130,6 +130,22 @@ const CreateBooking = () => {
                         maxMakeups: values.maxMakeups,
                         name: values.name,
                         createdAt: new Date().toString(),
+
+                        bookingEmail: 'settings@settingsfile.com',
+                        bookingName: 'Celine Odonell',
+                        bookingPhone: '53771465',
+                        bookingPrice: 'Arm and a Leg',
+                        juniorBridesmaids: '1',
+                        numberOfBrides: '1',
+                        numberOfMakeups: '1',
+                        numberOfMothersBridesmaids: '1',
+                        venueName: 'Airport Hilton',
+                        venuePostcode: 'SE77 1NG',
+                        weddingDate: '2021-09-23',
+                        weddingTime: '12:00',
+
+
+
                     })
                     .then(setModalOpen(false))
                       .catch(err => console.log(err))
