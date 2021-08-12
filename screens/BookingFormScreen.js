@@ -190,21 +190,21 @@ const CreateBooking = () => {
                 <View>                  
                     <View style={{height: 1}}>
                         <Text style={{fontSize:24}}>                    {selectedDate}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
-                        <Text style={{color:'#ffffff'}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
-                        <Text style={{color:'#ffffff'}}>{isBookedText = selectedDate + '.isBooked' }</Text>
-                        <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{isBookedText = selectedDate + '.isBooked' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     </View>
-                        <Text>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
-                        <Text>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
-                        <Text>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
-                        <Text>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
-                        <Text>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
-                        <Text>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
-                        <Text>{toString(isBookedValue)}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{toString(isBookedValue)}</Text>
                     </View>
             </View>
             
@@ -214,8 +214,7 @@ const CreateBooking = () => {
                         value={formikProps.values.weddingDate}
                         >
                         </TextInput>
-                        <Text>{formikProps.values.weddingDate}</Text>
-                        <Text>{bookingNameValue}</Text>
+                        
 
                         <TextInput style={globalStyles.newBookForm} 
                         placeholder='Venue Postcode'
@@ -237,7 +236,7 @@ const CreateBooking = () => {
                             
                         <Button title='check' color='maroon' onPress={() => {
                             setSelectedDate(formikProps.values.weddingDate)
-                            alert('Check details and press confirm')
+                            
                             setButton1Height(1)
                             setButton2Height(40)
                             
@@ -246,14 +245,15 @@ const CreateBooking = () => {
                                 
                             
                             
-                            if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
                                 
-                            } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
-                                // alert('Sorry, minimum 4 makeups for wedding booking');
-                            }
-                            else if (bookingNameValue === 'undefined'){
-                                // setModalOpen(true);
-                            } }
+                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
+                            //     // alert('Sorry, minimum 4 makeups for wedding booking');
+                            // }
+                            // else if (bookingNameValue === 'undefined'){
+                            //     // setModalOpen(true);
+                            // }
+                         }
                         }
                             />
                             
@@ -265,17 +265,25 @@ const CreateBooking = () => {
                             setButton2Height(1)
                             
 
-                            try{
+                            // try{
                                 
-                                console.log(bookingNameValue.length)
+                            //     console.log(bookingNameValue.length)
+                            // }
+                            // catch(err){
+                            //     console.log(err.message)
+                            // }
+                            if(parseInt(formikProps.values.numberOfMakeups) < 3 ){
+                                alert('Sorry, minimum 4 makeups for wedding booking')
+
                             }
-                            catch(err){
-                                console.log(err.message)
+                            if(bookingNameValue){
+                                alert('sorry but this date is booked, please try another')
                             }
                             
                             if(!bookingNameValue){
                                 setModalOpen(true);
                             }
+
                           
                                 
                             

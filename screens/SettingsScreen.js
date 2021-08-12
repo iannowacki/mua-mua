@@ -131,12 +131,18 @@ const CreateBooking = () => {
         <View>
             <View>                  
                     <View style={{height: 1}}>
-                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        {/* <Text style={{fontSize:24}}>                    {selectedDate}</Text> */}
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
                     </View>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
                         <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
                         <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
                         <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
