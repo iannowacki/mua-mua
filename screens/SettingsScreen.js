@@ -9,15 +9,48 @@ import { globalStyles } from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+Object.byString = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1'); 
+    s = s.replace(/^\./, '');           
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
+}
+
+
+
 const FormProps = {
     name: String
 }
 
 const CreateBooking = () => {
-
+    function bookMarkingsPopulate(){  
+        const reduced = bookings.reduce((acc, currentItem) => {
+            const {weddingDate, ...details} = currentItem;
+            acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
+            };
+        
+            return acc;
+            },{});
+            setItems(reduced);
+            
+        };
     
 
     const [bookings, setBookings ] = useState('')
+    const [items, setItems] = useState({
+        // '2021-09-04': [{}],
+        // '2021-09-11': [{}],
+        '2021-09-18': {dots: [notAvailable], selected: false},
+     
+    });
 
     const mapDocToBooking = (document) => {
         return {
@@ -42,7 +75,7 @@ const CreateBooking = () => {
 
         };
     };
-
+    
     useEffect(() => {
         const unsubscribe = streamBookings({
             next: querySnapshot => {
@@ -55,6 +88,17 @@ const CreateBooking = () => {
         return unsubscribe
     }, [setBookings]);
 
+    useEffect(()=>{
+       
+        try{
+            bookMarkingsPopulate();
+            setSelectedDate('2021-09-23')
+        }
+        catch(err){
+            console.log(err.message)
+        }
+        
+    }, [bookings])
     // const settingsFile = {};
     
     // const search = (nameKey, bookings) => {
@@ -66,6 +110,13 @@ const CreateBooking = () => {
     //     }
     // }
 
+
+    const notAvailable = {key: 'notAvailable', color: 'red'};
+    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    const workout = {key: 'workout', color: 'green'};
+    
+    const [selectedDate, setSelectedDate] = useState(''); 
+
     const navigation = useNavigation()
 
     const [modalOpen, setModalOpen] = useState(false) 
@@ -76,9 +127,23 @@ const CreateBooking = () => {
 
     return (
         <View>
+            <View>                  
+                    <View style={{height: 1}}>
+                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                    </View>
+                        <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
+                        <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
+                        <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
+                        <Text>Max no. of Makeups:      {Object.byString(items, maxMakeupsText )}</Text>
+                    </View>
+                
             
             
-            <View style={{height: 370}}>
+            {/* <View style={{height: 370}}>
                 
                 <FlatList
                     scrollEnabled={false}
@@ -110,7 +175,7 @@ const CreateBooking = () => {
                 >
                 </FlatList>
                 
-            </View>
+            </View> */}
             <View >
             < Formik
                 initialValues={{maxMakeups:'', 
