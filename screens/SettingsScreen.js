@@ -72,6 +72,8 @@ const CreateBooking = () => {
             maxMiles: document.data().maxMiles,
             maxMakeups: document.data().maxMakeups,
 
+            // isAvailable: document.date().isAvailable,
+
 
         };
     };
@@ -208,6 +210,9 @@ const CreateBooking = () => {
                         venuePostcode: 'SE77 1NG',
                         weddingDate: '2021-09-23',
                         weddingTime: '12:00',
+
+                        isAvailable: false,
+                        isBooked: true,
 
 
 
