@@ -125,18 +125,18 @@ const CreateBooking = () => {
                 {/* <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} /> */}
                 <View>                  
                     <View style={{height: 1}}>
-                    <Text style={{fontSize:24}}>                    {selectedDate}</Text>
-                    <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                    <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                    <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                    <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
                     </View>
-                    <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
-                    <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
-                    <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
-                    <Text>Max no. of Makeups:      {Object.byString(items, maxMakeupsText )}</Text>
+                        <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
+                        <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
+                        <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
+                        <Text>Max no. of Makeups:      {Object.byString(items, maxMakeupsText )}</Text>
+                    </View>
                 </View>
-            </View>
             
             < Formik
                 initialValues={{weddingDate: '', 
