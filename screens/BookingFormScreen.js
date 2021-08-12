@@ -24,13 +24,42 @@ Object.byString = function(o, s) {
     return o;
 }
 
-
-
 const FormProps = {
     name: String
 }
+
 const CreateBooking = () => {
 
+    const [numberOfBrides, setNumberOfBrides] = useState(0); 
+    const [numberOfMothersBridesmaids, setNumberOfMothersBridesmaids] = useState(0); 
+    const [juniorBridesmaids, setJuniorBridesmaids] = useState(0); 
+    
+    const [bridePrice, setBridePrice] = useState(0); 
+    const [bridesmaidMOBPrice, setBridesmaidMOBPrice] = useState(0); 
+    const [juniorBridesmaidPrice, setJuniorBridesmaidPrice] = useState(0); 
+    const [maxMakeups, setMaxMakeups] = useState(1); 
+    
+    
+
+    const notAvailable = {key: 'notAvailable', color: 'red'};
+    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    const workout = {key: 'workout', color: 'green'};
+    
+    const [selectedDate, setSelectedDate] = useState('2021-09-23'); 
+
+    const [button1Height, setButton1Height] = useState(40); 
+    const [button2Height, setButton2Height] = useState(1); 
+
+    const navigation = useNavigation()
+    const [modalOpen, setModalOpen] = useState(false) 
+
+    const [items, setItems] = useState({
+        '2021-09-18': {dots: [notAvailable], selected: false},
+    });
+    const [bookings, setBookings ] = useState('')
+    const validationSchema = yup.object().shape({
+        name: yup.string().required(),
+    })
 
     function bookMarkingsPopulate(){  
         const reduced = bookings.reduce((acc, currentItem) => {
@@ -43,14 +72,6 @@ const CreateBooking = () => {
             setItems(reduced);
             
         };
-
-    const [items, setItems] = useState({
-        // '2021-09-04': [{}],
-        // '2021-09-11': [{}],
-        '2021-09-18': {dots: [notAvailable], selected: false},
-     
-    });
-    const [bookings, setBookings ] = useState('')
 
     const mapDocToBooking = (document) => {
         return {
@@ -103,63 +124,23 @@ const CreateBooking = () => {
         
     }, [bookings])
 
-    let str = '';
-
-
-    const notAvailable = {key: 'notAvailable', color: 'red'};
-    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-    const workout = {key: 'workout', color: 'green'};
-    
-    const [selectedDate, setSelectedDate] = useState(''); 
-
-    const [button1Height, setButton1Height] = useState(40); 
-    const [button2Height, setButton2Height] = useState(1); 
-
-
-
-
-    const navigation = useNavigation()
-    const [modalOpen, setModalOpen] = useState(false) 
-    const validationSchema = yup.object().shape({
-        name: yup.string().required(),
-    })
     return (
         <View>
-            {/* <View>
-                <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} />
-                <View>                  
-                    <View style={{height: 1}}>
-                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
-                        <Text style={{color:'#ffffff'}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
-                        <Text style={{color:'#ffffff'}}>{isBookedText = selectedDate + '.isBooked' }</Text>
-                    </View>
-                        <Text>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
-                        <Text>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
-                        <Text>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
-                        <Text>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
-                        <Text>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
-                        <Text>{toString(isBookedValue)}</Text>
-                    </View>
-            </View> */}
-            
             < Formik
-                initialValues={{weddingDate: '', 
-                                venuePostcode: '', 
-                                numberOfMakeups: '', 
-                                name: '', 
-                                bookingName:'', 
-                                bookingPhone:'', 
-                                bookingEmail:'', 
-                                weddingTime:'',
-                                numberOfBrides:'', 
-                                numberOfMothersBridesmaids:'',
-                                juniorBridesmaids:'',
-                                bookingPrice:'',
-                                venueName:''}}
+                initialValues={{
+                    weddingDate: '', 
+                    venuePostcode: '', 
+                    numberOfMakeups: '', 
+                    name: '', 
+                    bookingName:'', 
+                    bookingPhone:'', 
+                    bookingEmail:'', 
+                    weddingTime:'',
+                    numberOfBrides:'', 
+                    numberOfMothersBridesmaids:'',
+                    juniorBridesmaids:'',
+                    bookingPrice:'',
+                    venueName:''}}
                 onSubmit={(values) => {
                     db.collection('bookings').add({
                         weddingDate: values.weddingDate,
@@ -198,14 +179,15 @@ const CreateBooking = () => {
                         <Text style={{color:'#ffffff', fontSize: 1}}>{isBookedText = selectedDate + '.isBooked' }</Text>
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     </View>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>{toString(isBookedValue)}</Text>
-                    </View>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+                <Text>{console.log()}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>{toString(isBookedValue)}</Text>
+                </View>
             </View>
             
                         <TextInput style={globalStyles.newBookForm} 
@@ -223,8 +205,6 @@ const CreateBooking = () => {
                         >
                         </TextInput>
 
-                        
-
                         <TextInput style={globalStyles.newBookForm} 
                         placeholder='Number of makeups'
                         onChangeText={formikProps.handleChange('numberOfMakeups')}
@@ -239,24 +219,9 @@ const CreateBooking = () => {
                             
                             setButton1Height(1)
                             setButton2Height(40)
-                            
-                            // console.log(bookingNameValue)
-                          
-                                
-                            
-                            
-                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
-                                
-                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
-                            //     // alert('Sorry, minimum 4 makeups for wedding booking');
-                            // }
-                            // else if (bookingNameValue === 'undefined'){
-                            //     // setModalOpen(true);
-                            // }
                          }
                         }
                             />
-                            
                             </View>
                             <View style={{height: button2Height, width: 370}}>
                             <Button title='confirm check' color='maroon' onPress={() => {
@@ -265,13 +230,7 @@ const CreateBooking = () => {
                             setButton2Height(1)
                             
 
-                            // try{
-                                
-                            //     console.log(bookingNameValue.length)
-                            // }
-                            // catch(err){
-                            //     console.log(err.message)
-                            // }
+                            
                             if(parseInt(formikProps.values.numberOfMakeups) < 3 ){
                                 alert('Sorry, minimum 4 makeups for wedding booking')
 
@@ -283,27 +242,12 @@ const CreateBooking = () => {
                             if(!bookingNameValue){
                                 setModalOpen(true);
                             }
-
-                          
-                                
                             
-                            
-                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
-                                
-                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
-                            //     alert('Sorry, minimum 4 makeups for wedding booking');
-                            // }
-                            // else if (!bookingNameValue){
-                            //     setModalOpen(true);
-                            // } 
                         }
                         }
                             />
                             </View>
                         
-                        
-                        {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
-                       
                         <Modal visible={modalOpen} animationType='slide' propagateSwipe={true}>
                         <ScrollView style={{padding:10}}>
                             
@@ -371,6 +315,27 @@ const CreateBooking = () => {
 
                                 <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/>
                             </View>
+
+                            <Button title={'Calculate price'} onPress={() => {
+
+
+                                setNumberOfBrides()
+                                setNumberOfMothersBridesmaids()
+                                setJuniorBridesmaids()
+                                    
+                                setBridePrice(parseInt(brideValue))
+                                setBridesmaidMOBPrice(parseInt(mobValue))
+                                setJuniorBridesmaidPrice(parseInt(juniorValue))
+                                setMaxMakeups(parseInt(juniorValue))
+                                console.log(juniorValue)
+
+
+                                // setBridePrice(brideValueInteger)
+                                // setMobPrice(mobValueInteger)
+                                // setJuniorPrice(juniorValueInteger)
+                            }}/>
+                            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{(numberOfBrides*bridePrice)+(numberOfMothersBridesmaids*bridesmaidMOBPrice)+(juniorBridesmaids*juniorBridesmaidPrice)}</Text>
+            
                             
                         </ScrollView>
                         </Modal>

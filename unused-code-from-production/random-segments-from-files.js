@@ -382,3 +382,119 @@
 //         backgroundColor: '#8fcddd'
 //     },
 // });
+
+{/* <View>
+                <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} />
+                <View>                  
+                    <View style={{height: 1}}>
+                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        <Text style={{color:'#ffffff'}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
+                        <Text style={{color:'#ffffff'}}>{isBookedText = selectedDate + '.isBooked' }</Text>
+                    </View>
+                        <Text>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                        <Text>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+                        <Text>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+                        <Text>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
+                        <Text>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
+                        <Text>{toString(isBookedValue)}</Text>
+                    </View>
+            </View> */}
+
+
+{/* <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} /> */}
+
+// console.log(bookingNameValue)
+                          
+                                
+                            
+                            
+                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                                
+                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
+                            //     // alert('Sorry, minimum 4 makeups for wedding booking');
+                            // }
+                            // else if (bookingNameValue === 'undefined'){
+                            //     // setModalOpen(true);
+                            // }
+
+  // try{
+                                
+                            //     console.log(bookingNameValue.length)
+                            // }
+                            // catch(err){
+                            //     console.log(err.message)
+                            // }
+
+// if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                                
+                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
+                            //     alert('Sorry, minimum 4 makeups for wedding booking');
+                            // }
+                            // else if (!bookingNameValue){
+                            //     setModalOpen(true);
+                            // } 
+{/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
+
+{/* <View>
+                <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} />
+                <View>                  
+                    <View style={{height: 1}}>
+                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        <Text style={{color:'#ffffff'}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
+                        <Text style={{color:'#ffffff'}}>{isBookedText = selectedDate + '.isBooked' }</Text>
+                    </View>
+                        <Text>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                        <Text>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+                        <Text>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+                        <Text>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
+                        <Text>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
+                        <Text>{toString(isBookedValue)}</Text>
+                    </View>
+            </View> */}
+
+                    // '2021-09-04': [{}],
+        // '2021-09-11': [{}],
+
+        // console.log(bookingNameValue)
+                          
+                                
+                            
+                            
+                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                                
+                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
+                            //     // alert('Sorry, minimum 4 makeups for wedding booking');
+                            // }
+                            // else if (bookingNameValue === 'undefined'){
+                            //     // setModalOpen(true);
+                            // }
+
+
+                            // try{
+                                
+                            //     console.log(bookingNameValue.length)
+                            // }
+                            // catch(err){
+                            //     console.log(err.message)
+                            // }
+
+                            // if (parseInt(formikProps.values.numberOfMakeups) > 3) {
+                                
+                            // } else if (!parseInt(formikProps.values.numberOfMakeups) || parseInt(formikProps.values.numberOfMakeups) < 3){
+                            //     alert('Sorry, minimum 4 makeups for wedding booking');
+                            // }
+                            // else if (!bookingNameValue){
+                            //     setModalOpen(true);
+                            // } 
+
+                             {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
+
+                             //let str = '';

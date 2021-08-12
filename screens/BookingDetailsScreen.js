@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 import db, {streamBookings} from '../db/firestore';
 
 
-
 Object.byString = function(o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); 
     s = s.replace(/^\./, '');           
@@ -26,24 +25,20 @@ Object.byString = function(o, s) {
 export default function BookingDetailsScreen  ({route, navigation}) {
 
     
-
     function bookMarkingsPopulate(){  
         const reduced = bookings.reduce((acc, currentItem) => {
             const {weddingDate, ...details} = currentItem;
             acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
             };
-        
             return acc;
             },{});
-            setItems(reduced);
-            
+            setItems(reduced); 
         };
 
     const [items, setItems] = useState({
         // '2021-09-04': [{}],
         // '2021-09-11': [{}],
         '2021-09-18': {dots: [notAvailable], selected: false},
-     
     });
     const [bookings, setBookings ] = useState('')
 
@@ -110,18 +105,6 @@ export default function BookingDetailsScreen  ({route, navigation}) {
     
     const [selectedDate, setSelectedDate] = useState(''); 
 
-
-
-
-
-
-
-
-
-
-
-
-
     const {id, name, weddingDate, venueName, venuePostcode, bookingName, 
         numberOfMakeups, numberOfBrides,numberOfMothersBridesmaids, 
         juniorBridesmaids, bookingPrice} = route.params; 
@@ -155,12 +138,11 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                         </TouchableWithoutFeedback>
                 )
             })
-        }
+        })
 
-        )
 
-    
-        return <View style={styles.container}>
+        return 
+            <View style={styles.container}>
             
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
@@ -201,16 +183,8 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                         <Text>{setJuniorPrice(juniorValueInteger)}</Text> */}
                     </View>
             </View>
-
-                
-
-        </View>
-    
-
-    
+        </View>  
 };
-
-
 
 const styles = StyleSheet.create({
     container: {
