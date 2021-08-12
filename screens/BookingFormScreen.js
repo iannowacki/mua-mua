@@ -38,6 +38,8 @@ const CreateBooking = () => {
     const [bridesmaidMOBPrice, setBridesmaidMOBPrice] = useState(0); 
     const [juniorBridesmaidPrice, setJuniorBridesmaidPrice] = useState(0); 
     const [maxMakeups, setMaxMakeups] = useState(1); 
+
+    const [calculatedPrice, setCalculatedPrice ] = useState(0);
     
     
 
@@ -72,7 +74,9 @@ const CreateBooking = () => {
             setItems(reduced);
             
         };
-
+    function calculatePrice(){
+        
+    }
     const mapDocToBooking = (document) => {
         return {
             id: document.id,
@@ -123,6 +127,13 @@ const CreateBooking = () => {
         }
         
     }, [bookings])
+
+    useEffect(() =>{
+        setBridePrice(brideValueInteger)
+                setBridesmaidMOBPrice(mobValueInteger)
+                setJuniorBridesmaidPrice(juniorValueInteger)
+
+    }, [items])
 
     return (
         <View>
@@ -180,6 +191,7 @@ const CreateBooking = () => {
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     </View>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                <Text>{console.log(bridePrice)}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
                 <Text>{console.log()}</Text>
@@ -216,9 +228,12 @@ const CreateBooking = () => {
                             
                         <Button title='check' color='maroon' onPress={() => {
                             setSelectedDate(formikProps.values.weddingDate)
-                            
                             setButton1Height(1)
                             setButton2Height(40)
+
+
+
+                            
                          }
                         }
                             />
@@ -229,6 +244,7 @@ const CreateBooking = () => {
                             setButton1Height(40)
                             setButton2Height(1)
                             
+                            setModalOpen(true);
 
                             
                             if(parseInt(formikProps.values.numberOfMakeups) < 3 ){
@@ -316,7 +332,7 @@ const CreateBooking = () => {
                                 <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/>
                             </View>
 
-                            <Button title={'Calculate price'} onPress={() => {
+                            {/* <Button title={'Calculate price'} onPress={() => {
 
 
                                 setNumberOfBrides()
@@ -335,8 +351,80 @@ const CreateBooking = () => {
                                 // setJuniorPrice(juniorValueInteger)
                             }}/>
                             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{(numberOfBrides*bridePrice)+(numberOfMothersBridesmaids*bridesmaidMOBPrice)+(juniorBridesmaids*juniorBridesmaidPrice)}</Text>
-            
+             */}
                             
+                            <View style={styles.container}>
+            
+            {/* <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Postcode:               {venuePostcode}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Name:           {bookingName}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Makeups:               {numberOfMakeups}</Text> */}
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>MOBS/Bridesmaids:               {numberOfMothersBridesmaids}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Junior Bridesmaids:                {juniorBridesmaids}</Text>
+            
+             <Text>{calculatedPrice}</Text>
+            <Button title={'Calculate price'} onPress={() => {
+
+                
+                
+
+                setNumberOfBrides(formikProps.values.numberOfBrides)
+                setNumberOfMothersBridesmaids(formikProps.values.numberOfMothersBridesmaids)
+                setJuniorBridesmaids(formikProps.values.juniorBridesmaids)
+
+                console.log('numberOfBrides: ' + formikProps.values.numberOfBrides)
+                console.log('numberOfMothersBridesmaids: ' + formikProps.values.numberOfMothersBridesmaids)
+                console.log('juniorBridesmaids: ' + formikProps.values.juniorBridesmaids)
+
+
+                console.log('bride price: ' + bridePrice)
+                console.log('bridesmaid/mob price: ' + bridesmaidMOBPrice)
+                console.log('junior bridesmaid price: ' + juniorBridesmaidPrice)
+
+                const calculatedPrice = (formikProps.values.numberOfBrides*bridePrice) 
+                                        + (formikProps.values.numberOfMothersBridesmaids*bridesmaidMOBPrice) 
+                                        + (formikProps.values.juniorBridesmaids*juniorBridesmaidPrice)
+                console.log ('Calculated Price: ' + calculatedPrice)
+
+                setCalculatedPrice(calculatedPrice)
+                
+
+            }}/>
+            
+            
+            
+            <View>                  
+                    <View style={{height: 1}}>
+                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                        <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                        <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                    </View>
+            <Text>My Current Prices:</Text>
+            <Text>Bride :      {brideValue = Object.byString(items, bridePriceText )}</Text>
+            <Text>Maid/MOB :      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+            <Text>Junior :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+            
+                    <View style={{height: 1}}>
+                        
+                        <Text>{brideValueInteger = parseInt(brideValue)}</Text>
+                        <Text>{mobValueInteger = parseInt(mobValue)}</Text>
+                        <Text>{juniorValueInteger = parseInt(juniorValue)}</Text>
+                        {/* <Text>{setBridePrice(brideValueInteger)}</Text>
+                        <Text>{setMobPrice(mobValueInteger)}</Text>
+                        <Text>{setJuniorPrice(juniorValueInteger)}</Text> */}
+                    </View>
+            </View>
+        </View>  
+
+
+
+
+
+
                         </ScrollView>
                         </Modal>
                         

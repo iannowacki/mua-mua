@@ -141,7 +141,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
         })
 
 
-        return 
+        return (
             <View style={styles.container}>
             
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
@@ -184,7 +184,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                     </View>
             </View>
         </View>  
-};
+        )};
 
 const styles = StyleSheet.create({
     container: {
