@@ -130,6 +130,7 @@ const CreateBooking = () => {
     return (
         <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
         <View  style={{
+            borderRadius: 10,
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
               width: 3,
@@ -227,6 +228,7 @@ const CreateBooking = () => {
                             
                             <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
                                 <View style={{
+                                    borderRadius: 10,
                                     shadowColor: 'rgb(0, 0, 0)',
                                     shadowOffset: {
                                     width: 3,
@@ -299,9 +301,13 @@ const CreateBooking = () => {
                         > 
                         </TextInput>
                         <Text></Text>
+
+                        
                         <Text></Text>
 
-                        <Button title='Confirm Update Settings' color='maroon' onPress={formikProps.handleSubmit}/>
+                        <Button title='Confirm Update Settings' color='maroon' onPress={
+                        
+                            formikProps.handleSubmit}/>
 
                     
                             
@@ -312,7 +318,7 @@ const CreateBooking = () => {
                         </Modal>
     
                       
-                        <Button title='Update Settings' color='maroon' onPress={()=> setModalOpen(true)} />
+                        <Button title='Click here to update Settings' color='maroon' onPress={()=> setModalOpen(true)} />
                       
                        
                         

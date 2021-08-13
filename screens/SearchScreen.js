@@ -48,6 +48,7 @@ const SearchScreen = ({navigation}) => {
                 data={bookings}
                 renderItem={({item}) => (
                     <View  style={{
+                        borderRadius: 10,
                         shadowColor: 'rgb(0, 0, 0)',
                         shadowOffset: {
                           width: 3,

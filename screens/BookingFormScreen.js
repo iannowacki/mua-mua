@@ -140,9 +140,12 @@ const CreateBooking = () => {
 
     }, [items])
 
+   
+
     return (
-        <View style={{backgroundColor: '#FDEFEF', flex: 1}} >
+    <View style={{backgroundColor: '#FDEFEF', flex: 1}} >
         <View style={{
+            borderRadius: 10,
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
               width: 3,
@@ -292,6 +295,7 @@ const CreateBooking = () => {
                         <Modal visible={modalOpen} animationType='slide' propagateSwipe={true}>
                             <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
                             <View style={{
+                                borderRadius: 10,
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
               width: 3,

@@ -136,6 +136,7 @@ function bookMarkingsPopulate(){
                 </View>
 
                 <View style={{
+                    borderRadius: 10,
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
               width: 3,

@@ -145,6 +145,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
             <ScrollView>
             <View style={{backgroundColor: '#FDEFEF'}}>
             <View style={{
+                borderRadius: 10,
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
               width: 3,

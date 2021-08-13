@@ -6,7 +6,11 @@ SearchScreenNavigator, SettingsScreenNavigator} from './NavigationStacks';
 import { Ionicons } from '@expo/vector-icons';
 // import IonicIcon from 'react-native-vector-icons/Ionicicons';
 // import { Ionicicons } from '@expo/vector-icons';
-import { Dimensions } from 'react-native';
+import { Dimensions, LogBox } from 'react-native';
+
+
+LogBox.ignoreAllLogs();
+
 const fullScreenWidth = Dimensions.get('window').width;
 
 const Tab = createBottomTabNavigator();
@@ -14,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
     return(
         <Tab.Navigator
-        initialRouteName={'New Booking'}
+        initialRouteName='New'
         tabBarOptions={{
             activeTintColor: '#7D5A5A',
             inactiveTintColor: 'grey',
