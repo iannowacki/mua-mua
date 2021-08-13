@@ -34,7 +34,7 @@ const CalendarViewScreen = ({navigation}) => {
 function bookMarkingsPopulate(){  
         const reduced = bookings.reduce((acc, currentItem) => {
             const {weddingDate, ...details} = currentItem;
-            acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
+            acc[weddingDate] = {...details, selected: true, selectedColor: '#CE97B0'
             };
         
             return acc;
@@ -105,11 +105,15 @@ function bookMarkingsPopulate(){
     const [modalOpen, setModalOpen] = useState(false);
     return(
         
-        <View style={styles.containe}>
+        <View style={styles.container}>
             
             {/* <Button title={'Press to reduce'} onPress={() => bookMarkingsPopulate()}/> */}
             
             <CalendarList 
+
+             theme={{backgroundColor: '#FDEFEF', calendarBackground: '#FDEFEF',}}
+
+
             onDayPress={(day) => {setModalOpen(true); setSelectedDate(day.dateString);  }}
 
             markingType={'dot'}
@@ -152,7 +156,9 @@ function bookMarkingsPopulate(){
 export default CalendarViewScreen;
 
 const styles = StyleSheet.create({
+    
     container: {
-        
+       
+        backgroundColor: '#FDEFEF'
     },
 });

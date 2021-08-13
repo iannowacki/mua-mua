@@ -17,9 +17,9 @@ const Stack = createStackNavigator();
 const MessengerScreenNavigator = () => {
   return (
     <Stack.Navigator >
-      <Stack.Screen name="Messenger" component={MessengerScreen} options={{headerShown: true}}/>
+      <Stack.Screen name="Messenger" component={MessengerScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
       
-      <Stack.Screen name="MessageDetailsScreen" component={MessageDetailsScreen} />
+      <Stack.Screen name="MessageDetailsScreen" component={MessageDetailsScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
     </Stack.Navigator>
   );
 }
@@ -31,7 +31,7 @@ export {MessengerScreenNavigator};
 const CalendarViewScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="Calendar View" component={CalendarViewScreen} />
+        <Stack.Screen name="Calendar View" component={CalendarViewScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
         {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
       </Stack.Navigator>
     );
@@ -51,13 +51,16 @@ const CalendarViewScreenNavigator = () => {
                 <Ionicons 
                   name={'ios-add'} 
                   size={44} 
-                  color={'#0080ff'} 
+                  color={'#2D2424'} 
                   style={{marginRight: 25}} />
               </TouchableWithoutFeedback>
-            )
+            ),
+            headerStyle: {
+              backgroundColor: '#F4DFD0',
+            },
           })}
         />
-        <Stack.Screen name="BookingFormScreen" component={BookingFormScreen} />
+        <Stack.Screen name="BookingFormScreen" component={BookingFormScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
       </Stack.Navigator>
     );
   }
@@ -67,8 +70,8 @@ const CalendarViewScreenNavigator = () => {
   const SearchScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="View all Bookings" component={SearchScreen} />
-        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} />
+        <Stack.Screen name="View all Bookings" component={SearchScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
+        <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
       </Stack.Navigator>
     );
   }
@@ -78,7 +81,7 @@ const CalendarViewScreenNavigator = () => {
   const SettingsScreenNavigator = () => {
     return (
       <Stack.Navigator >
-        <Stack.Screen name="Settings Page" component={SettingsScreen} />
+        <Stack.Screen name="Settings Page" component={SettingsScreen} options={{headerStyle:{backgroundColor: '#F4DFD0'},}} />
         {/* <Stack.Screen name="BookingDetailsScreen" component={BookingDetailsScreen} /> */}
       </Stack.Navigator>
     );

@@ -4,7 +4,7 @@ export const globalStyles = StyleSheet.create({
     bodyText: {
         
         fontSize: 24,
-        color: '#FFFFFF',
+        color: '#7D5A5A',
 
     },
     bodyTextDark: {

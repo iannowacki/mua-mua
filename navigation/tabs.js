@@ -16,9 +16,9 @@ const Tabs = () => {
         <Tab.Navigator
         initialRouteName={'New Booking'}
         tabBarOptions={{
-            activeTintColor: 'lightseagreen',
+            activeTintColor: '#7D5A5A',
             inactiveTintColor: 'grey',
-            inactiveBackgroundColor: 'white',
+            inactiveBackgroundColor: '#F4DFD0',
             labelStyle:{
                 // borderRadius: 5,
                 // height: 60,
@@ -27,6 +27,7 @@ const Tabs = () => {
                 // right: 20,
                 // height: 90,
                 fontSize: 12,
+                
             }
         }}
         screenOptions={
@@ -39,9 +40,9 @@ const Tabs = () => {
                     iconName = focused ? 'md-calendar' : 'md-calendar-outline';
                 } else if (route.name === 'Messages') {
                     iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
-                } else if (route.name === 'New Booking') {
+                } else if (route.name === 'New') {
                     iconName = focused ? 'add-circle' : 'add-circle-outline';
-                } else if (route.name === 'View Bookings') {
+                } else if (route.name === 'Bookings') {
                     iconName = focused ? 'ios-search-circle' : 'ios-search-circle-outline';
                 } else if (route.name === 'Settings') {
                     iconName = focused ? 'md-checkmark-circle' : 'settings-outline';
@@ -67,8 +68,10 @@ const Tabs = () => {
         >
             <Tab.Screen name="Calendar" component={CalendarViewScreenNavigator} options={{headerShown: false}}  />
             <Tab.Screen name="Messages" component={MessengerScreenNavigator}  options={{headerShown: false}} />
-            <Tab.Screen name="New Booking" component={NewBookingScreenNavigator} options={{headerShown: false}} />
-            <Tab.Screen name="View Bookings" component={SearchScreenNavigator} options={{headerShown: false}} />
+            <Tab.Screen name="New" component={NewBookingScreenNavigator} options={{headerShown: false}} />
+            <Tab.Screen name="Bookings" component={SearchScreenNavigator} options={{headerShown: false}} />
+           
+            
             <Tab.Screen name="Settings" component={SettingsScreenNavigator} options={{headerShown: false}} />
         </Tab.Navigator>
 

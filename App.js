@@ -25,3 +25,14 @@ const styles= StyleSheet.create({
 });
 
 export default App;
+
+
+// colour pallette: https://colorhunt.co/palette/fdefeff4dfd0dad0c2cdbba7
+
+// #CDBBA7
+
+// #DAD0C2
+
+// #F4DFD0
+
+// #FDEFEF

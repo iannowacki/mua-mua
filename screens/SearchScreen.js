@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#CBAACB'
+        backgroundColor: '#FDEFEF'
     },
     flatListItem:{
         padding: 16,
         marginTop: 16,
-        borderColor: '#ffff',
+        borderColor: '#7D5A5A',
         borderWidth: 1,
         borderStyle: 'dashed',
         borderRadius: 10,

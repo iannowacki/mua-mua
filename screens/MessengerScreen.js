@@ -55,7 +55,7 @@ const MessengerScreen = ({navigation}) => {
                 renderItem={({item}) => (
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('MessageDetailsScreen', item)}>
                         
-                        <Text style={globalStyles.bodyText} >From: {item.bookingName}</Text>
+                        <Text style={globalStyles.bodyText} >{item.bookingName}</Text>
                         <Text style={{fontSize: 20}} >Subject: New Booking Notification! </Text>
                         <Text >{item.createdAt}</Text>
                         
@@ -75,15 +75,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FF968A'
+        backgroundColor: '#FDEFEF'
     },
     flatListItem:{
         padding: 16,
         marginTop: 16,
-        borderColor: '#ffff',
+        borderColor: '#7D5A5A',
         borderWidth: 1,
         borderStyle: 'dashed',
-        borderRadius: 10
+        borderRadius: 5
 
     },
     modalView: {

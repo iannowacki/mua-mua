@@ -141,7 +141,7 @@ const CreateBooking = () => {
     }, [items])
 
     return (
-        <View>
+        <View >
             < Formik
                 initialValues={{
                     weddingDate: '', 

@@ -128,8 +128,8 @@ const CreateBooking = () => {
     })
 
     return (
-        <View>
-            <View>                  
+        <View style={{backgroundColor: '#FDEFEF'}}>
+            <View style={{backgroundColor: '#FDEFEF'}}>                  
                     <View style={{height: 1}}>
                         {/* <Text style={{fontSize:24}}>                    {selectedDate}</Text> */}
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
@@ -143,6 +143,11 @@ const CreateBooking = () => {
                         <Text></Text>
                         <Text></Text>
                         <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                       
                         <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
                         <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
                         <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
@@ -151,40 +156,8 @@ const CreateBooking = () => {
                 
             
             
-            {/* <View style={{height: 370}}>
-                
-                <FlatList
-                    scrollEnabled={false}
-                    data={bookings}
-                    renderItem={({item}) => (
-                        
-                        <TouchableOpacity style={styles.flatListItem} >
-                            <Text style={globalStyles.bodyTextDark}>Current Settings:</Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}>Max Makeups:    {item.maxMakeups}</Text>
-                            <Text style={globalStyles.bodyTextDark}>Max Miles:    {item.maxMiles}</Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}>Bride Price:    {item.bridePrice}</Text>
-                            <Text style={globalStyles.bodyTextDark}>Bridesmaid Price:    {item.bridesmaidMOBPrice}</Text>
-                            <Text style={globalStyles.bodyTextDark}>Junior Price:    {item.juniorBridesmaidPrice}</Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                            <Text style={globalStyles.bodyTextDark}></Text>
-                        </TouchableOpacity>
-                        
-                    )}
-                >
-                </FlatList>
-                
-            </View> */}
-            <View >
+            
+            <View style={{backgroundColor: '#FDEFEF'}}>
             < Formik
                 initialValues={{maxMakeups:'', 
                                 maxMiles:'', 
@@ -230,7 +203,7 @@ const CreateBooking = () => {
                 
                 {(formikProps) => (
                     <View>
-                        <Modal visible={modalOpen} animationType='slide'>
+                        <Modal style={{backgroundColor: '#FDEFEF'}} visible={modalOpen} animationType='slide'>
 
                         <ScrollView style={{padding:30}}>
                             <MaterialIcons
@@ -284,10 +257,52 @@ const CreateBooking = () => {
                             
                         </ScrollView>
                         </Modal>
-                        
-                        
+    
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
                         <Button title='Update Settings' color='maroon' onPress={()=> setModalOpen(true)} />
-                        
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
+                        <Text></Text>
                         
                     </View>
                 )}

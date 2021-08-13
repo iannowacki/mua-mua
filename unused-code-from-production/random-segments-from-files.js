@@ -498,3 +498,37 @@
                              {/* <Button title='sumbit' color='maroon' onPress={()=>alert("Always don't be not alert")}/> */}
 
                              //let str = '';
+
+                             {/* <View style={{height: 370}}>
+                
+                <FlatList
+                    scrollEnabled={false}
+                    data={bookings}
+                    renderItem={({item}) => (
+                        
+                        <TouchableOpacity style={styles.flatListItem} >
+                            <Text style={globalStyles.bodyTextDark}>Current Settings:</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}>Max Makeups:    {item.maxMakeups}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Max Miles:    {item.maxMiles}</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}>Bride Price:    {item.bridePrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Bridesmaid Price:    {item.bridesmaidMOBPrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}>Junior Price:    {item.juniorBridesmaidPrice}</Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                            <Text style={globalStyles.bodyTextDark}></Text>
+                        </TouchableOpacity>
+                        
+                    )}
+                >
+                </FlatList>
+                
+            </View> */}
