@@ -107,7 +107,7 @@ function bookMarkingsPopulate(){
         
         <View style={styles.container}>
             
-            {/* <Button title={'Press to reduce'} onPress={() => bookMarkingsPopulate()}/> */}
+            
             
             <CalendarList 
 
@@ -122,31 +122,69 @@ function bookMarkingsPopulate(){
             
             
             <Modal visible={modalOpen} animationType='slide'>
-                <View style={globalStyles.modalStyle}>
-                    <MaterialIcons
+                <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{flex: 3}}></View>
+                    <View style={{flex: 1}}>
+                        <MaterialIcons
                             name='close'
                             size={26}
                             style={globalStyles.modalToggle}
                             onPress={() => setModalOpen(false)}
                             />
+                    </View>
                 </View>
-                <View>
+
+                <View style={{
+            shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 6,
+            elevation: 2,
+            backgroundColor: 'white',
+
+            padding: 20,
+            margin: 20,
+            
+          }}>
                     
                     
                     <View style={{height: 1}}>
-                    <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                    
                     <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
                     <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
                     <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
                     </View>
-                    <Text>Venue:      {Object.byString(items, venueNameText )}</Text>
-                    <Text>Booking Name:      {Object.byString(items, bookingNameText )}</Text>
-                    <Text>Venue Postcode:      {Object.byString(items, postcodeText )}</Text>
-                    <Text>Number of Makeups:      {Object.byString(items, numberOfMakeupsText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>{selectedDate}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Venue:</Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, venueNameText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Ceremony Time:</Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, numberOfMakeupsText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Booking Name: </Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, bookingNameText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Venue Postcode: </Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, postcodeText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Number of Makeups:</Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, numberOfMakeupsText )}</Text>
                     
                 </View>
-                
+                </View>
             </Modal>
             
         </View>

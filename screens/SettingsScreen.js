@@ -128,7 +128,7 @@ const CreateBooking = () => {
     })
 
     return (
-        <View style={{backgroundColor: '#FDEFEF', flex: 1}}>
+        <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
         <View  style={{
             shadowColor: 'rgb(0, 0, 0)',
             shadowOffset: {
@@ -142,6 +142,7 @@ const CreateBooking = () => {
 
             padding: 20,
             margin: 20,
+            
           }}>
             
             
@@ -155,13 +156,12 @@ const CreateBooking = () => {
                     <Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
                 </View>
                 <View >
-                    <Text></Text>
+                    
                     <Text></Text>
                     <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>My Current Settings</Text>  
                     <Text></Text>
                     <Text></Text>
-                    <Text></Text>
-                    <Text></Text>
+                    
                     <Text></Text>
                     <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Bride Price:</Text>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>£{Object.byString(items, bridePriceText )}</Text>
@@ -174,8 +174,6 @@ const CreateBooking = () => {
                     <Text></Text>
                     <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Minimum Makeups:  </Text>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, maxMakeupsText )}</Text>
-                    <Text></Text>
-                    <Text></Text>
                     <Text></Text>
                     <Text></Text>
                     <Text></Text>
