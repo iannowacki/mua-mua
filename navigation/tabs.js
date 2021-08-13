@@ -15,7 +15,23 @@ const Tabs = () => {
     return(
         <Tab.Navigator
         initialRouteName={'New Booking'}
-        screenOptions={({route}) => ({
+        tabBarOptions={{
+            activeTintColor: 'lightseagreen',
+            inactiveTintColor: 'grey',
+            inactiveBackgroundColor: 'white',
+            labelStyle:{
+                // borderRadius: 5,
+                // height: 60,
+                // bottom: 25,
+                // left: 20,
+                // right: 20,
+                // height: 90,
+                fontSize: 12,
+            }
+        }}
+        screenOptions={
+            
+            ({route}) => ({
             headerTitle: () => <Text>Header</Text>,
             tabBarIcon: ({focused, color, size, padding}) => {
                 let iconName;
@@ -25,7 +41,7 @@ const Tabs = () => {
                     iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
                 } else if (route.name === 'New Booking') {
                     iconName = focused ? 'add-circle' : 'add-circle-outline';
-                } else if (route.name === 'View Booking') {
+                } else if (route.name === 'View Bookings') {
                     iconName = focused ? 'ios-search-circle' : 'ios-search-circle-outline';
                 } else if (route.name === 'Settings') {
                     iconName = focused ? 'md-checkmark-circle' : 'settings-outline';
@@ -41,13 +57,13 @@ const Tabs = () => {
 
             },
         })}
-        screenOptions={{
-            activeTintColor: 'lightseagreen',
-            inactiveTintColor: 'grey',
-            labelStyle: {fontSize: 16},
+        // screenOptions={{
+        //     activeTintColor: 'lightseagreen',
+        //     inactiveTintColor: 'grey',
+        //     labelStyle: {fontSize: 16},
             
 
-        }}
+        // }}
         >
             <Tab.Screen name="Calendar" component={CalendarViewScreenNavigator} options={{headerShown: false}}  />
             <Tab.Screen name="Messages" component={MessengerScreenNavigator}  options={{headerShown: false}} />
