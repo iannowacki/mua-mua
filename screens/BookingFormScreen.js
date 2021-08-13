@@ -122,6 +122,7 @@ const CreateBooking = () => {
        
         try{
             bookMarkingsPopulate();
+            
             //setSelectedDate('2021-09-23')
         }
         catch(err){
@@ -132,8 +133,10 @@ const CreateBooking = () => {
 
     useEffect(() =>{
         setBridePrice(brideValueInteger)
-                setBridesmaidMOBPrice(mobValueInteger)
-                setJuniorBridesmaidPrice(juniorValueInteger)
+        setBridesmaidMOBPrice(mobValueInteger)
+        setJuniorBridesmaidPrice(juniorValueInteger)
+        setMaxMakeups(maxMakeupsInteger);
+                
 
     }, [items])
 
@@ -193,10 +196,10 @@ const CreateBooking = () => {
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                     </View>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
-                <Text>{console.log(bridePrice)}</Text>
+        <Text>{console.log(items)}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
-                <Text>{console.log()}</Text>
+                
                     <Text style={{color:'#ffffff', fontSize: 1}}>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
@@ -248,8 +251,7 @@ const CreateBooking = () => {
                             setButton2Height(1)
 
                             setNumberOfMakeups(formikProps.values.numberOfMakeups)
-                            console.log(formikProps.values.numberOfMakeups)
-                            console.log('numbr of makeups: ' + numberOfMakeups)
+                            
                             
                             
 
@@ -258,8 +260,11 @@ const CreateBooking = () => {
                             if(bookingNameValue){
                                 alert('sorry but this date is booked, please try another')
                             }
-                            else if (numberOfMakeups < 3){
-                                alert('does not meet minimum makeups')
+                            else if(numberOfMakeups < 3 ){
+                                alert('less than minimum makeups: 3')
+                            }
+                            else if (numberOfMakeups > maxMakeups){
+                                alert('over maximum makeups')
 
                             }
                             else if(!bookingNameValue && parseInt(formikProps.values.numberOfMakeups) > 3 ){
@@ -381,14 +386,7 @@ const CreateBooking = () => {
                 setNumberOfMothersBridesmaids(formikProps.values.numberOfMothersBridesmaids)
                 setJuniorBridesmaids(formikProps.values.juniorBridesmaids)
 
-                console.log('numberOfBrides: ' + formikProps.values.numberOfBrides)
-                console.log('numberOfMothersBridesmaids: ' + formikProps.values.numberOfMothersBridesmaids)
-                console.log('juniorBridesmaids: ' + formikProps.values.juniorBridesmaids)
-
-
-                console.log('bride price: ' + bridePrice)
-                console.log('bridesmaid/mob price: ' + bridesmaidMOBPrice)
-                console.log('junior bridesmaid price: ' + juniorBridesmaidPrice)
+               
 
                 const calculatedPrice = (formikProps.values.numberOfBrides*bridePrice) 
                                         + (formikProps.values.numberOfMothersBridesmaids*bridesmaidMOBPrice) 
@@ -412,14 +410,21 @@ const CreateBooking = () => {
                     </View>
             <Text>My Current Prices:</Text>
             <Text>Bride :      {brideValue = Object.byString(items, bridePriceText )}</Text>
+           
             <Text>Maid/MOB :      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+            
             <Text>Junior :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+            <Text>Max Makeups :      {maximumMakeups = Object.byString(items, maxMakeupsText )}</Text>
+            
             
                     <View style={{height: 1}}>
                         
                         <Text>{brideValueInteger = parseInt(brideValue)}</Text>
+                        
                         <Text>{mobValueInteger = parseInt(mobValue)}</Text>
                         <Text>{juniorValueInteger = parseInt(juniorValue)}</Text>
+                        <Text>{maxMakeupsInteger = parseInt(maximumMakeups)}</Text>
+                        
                         {/* <Text>{setBridePrice(brideValueInteger)}</Text>
                         <Text>{setMobPrice(mobValueInteger)}</Text>
                         <Text>{setJuniorPrice(juniorValueInteger)}</Text> */}
