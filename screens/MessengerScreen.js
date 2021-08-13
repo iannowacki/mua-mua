@@ -54,7 +54,9 @@ const MessengerScreen = ({navigation}) => {
                 data={bookings}
                 renderItem={({item}) => (
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('MessageDetailsScreen', item)}>
-                        <Text style={globalStyles.bodyText}>New Booking Notification! </Text>
+                        
+                        <Text style={globalStyles.bodyText} >From: {item.bookingName}</Text>
+                        <Text style={{fontSize: 20}} >Subject: New Booking Notification! </Text>
                         <Text >{item.createdAt}</Text>
                         
                     </TouchableOpacity>

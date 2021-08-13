@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Button, StyleSheet, Modal, ScrollView} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Button, StyleSheet, Modal, ScrollView} from 'react-native';
 import { Calendar, CalendarList } from 'react-native-calendars';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
 import { withRepeat } from 'react-native-reanimated';
+
 
 /**
  * Search function to access fields in nested objects
@@ -26,6 +27,7 @@ Object.byString = function(o, s) {
     }
     return o;
 }
+
 
 const CalendarViewScreen = ({navigation}) => {
 
@@ -140,6 +142,7 @@ function bookMarkingsPopulate(){
                     <Text>Number of Makeups:      {Object.byString(items, numberOfMakeupsText )}</Text>
                     
                 </View>
+                
             </Modal>
             
         </View>

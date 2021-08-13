@@ -208,7 +208,7 @@ const CreateBooking = () => {
             </View>
             
                         <TextInput style={globalStyles.newBookForm} 
-                        placeholder='Wedding Date'
+                        placeholder='Wedding Date "YYYY-MM-DD" '
                         onChangeText={formikProps.handleChange('weddingDate')}
                         value={formikProps.values.weddingDate}
                         >
