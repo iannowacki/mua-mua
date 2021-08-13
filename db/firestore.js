@@ -18,7 +18,7 @@ const db = firebase.firestore();
 
 export const streamBookings = (observer) => {
     db.collection('bookings')
-    .orderBy('name', 'desc')
+    .orderBy('weddingDate', 'asc')
     .onSnapshot(observer)
 }
 

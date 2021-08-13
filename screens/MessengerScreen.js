@@ -53,6 +53,20 @@ const MessengerScreen = ({navigation}) => {
             <FlatList
                 data={bookings}
                 renderItem={({item}) => (
+                    <View  style={{
+                        shadowColor: 'rgb(0, 0, 0)',
+                        shadowOffset: {
+                          width: 3,
+                          height: 3,
+                        },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 6,
+                        elevation: 2,
+                        backgroundColor: 'white',
+            
+                        padding: 12,
+                        margin: 12,
+                      }}>
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('MessageDetailsScreen', item)}>
                         
                         <Text style={globalStyles.bodyText} >{item.bookingName}</Text>
@@ -60,6 +74,7 @@ const MessengerScreen = ({navigation}) => {
                         <Text >{item.createdAt}</Text>
                         
                     </TouchableOpacity>
+                    </View>
                 )}
             >
             </FlatList>
@@ -78,10 +93,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDEFEF'
     },
     flatListItem:{
-        padding: 16,
-        marginTop: 16,
+        padding: 5,
+        marginTop: 5,
         borderColor: '#7D5A5A',
-        borderWidth: 1,
+        borderWidth: 0,
         borderStyle: 'dashed',
         borderRadius: 5
 

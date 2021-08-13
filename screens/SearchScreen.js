@@ -4,9 +4,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 import {globalStyles} from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
+import {Card} from 'react-native-shadow-cards';
 
 const SearchScreen = ({navigation}) => {
-
+    
 
     const [bookings, setBookings ] = useState()
 
@@ -40,16 +41,35 @@ const SearchScreen = ({navigation}) => {
     }, [setBookings]);
     
     return(
+        
         <View style={styles.container}>
+            
             <FlatList
                 data={bookings}
                 renderItem={({item}) => (
+                    <View  style={{
+                        shadowColor: 'rgb(0, 0, 0)',
+                        shadowOffset: {
+                          width: 3,
+                          height: 3,
+                        },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 6,
+                        elevation: 2,
+                        backgroundColor: 'white',
+            
+                        padding: 12,
+                        margin: 12,
+                      }}>
+                    
                     <TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('BookingDetailsScreen', item)}>
                         <Text style={globalStyles.bodyTextDark}>Date: {item.weddingDate}</Text>
                         <Text style={globalStyles.bodyText}>Venue: {item.venueName}</Text>
                         <Text style={globalStyles.bodyText}>Name: {item.bookingName}</Text>
                         <Text style={globalStyles.bodyText}>Makeups: {item.numberOfMakeups}</Text>
                     </TouchableOpacity>
+                    
+                    </View>
                 )}
             >
             </FlatList>
@@ -60,6 +80,11 @@ const SearchScreen = ({navigation}) => {
 
 export default SearchScreen;
 
+const shadowStyle={
+    shadowOpacity:0.5,
+    shadowRadius:20,
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -68,11 +93,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDEFEF'
     },
     flatListItem:{
-        padding: 16,
-        marginTop: 16,
+        padding: 5,
+        marginTop: 5,
         borderColor: '#7D5A5A',
-        borderWidth: 1,
-        borderStyle: 'dashed',
+        borderWidth: 0,
+        borderStyle: 'solid',
         borderRadius: 10,
         
 
@@ -82,3 +107,7 @@ const styles = StyleSheet.create({
         
     }
 });
+
+
+// <Card style={{padding:0, margin: 0, width: '97%', height: '40%', alignItems: 'center', justifyContent: 'center',}}></Card>
+// </Card>
