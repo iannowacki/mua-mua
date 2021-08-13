@@ -6,11 +6,24 @@ import {globalStyles} from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
 import {Card} from 'react-native-shadow-cards';
 
+
+/**
+ * Screen to display all bookings in a flat list (planned to be search page)
+ * 
+ * @param {props} param0 props passed through navigation
+ */
 const SearchScreen = ({navigation}) => {
     
-
+    /**
+     * Data structure where date is key and value are the rest of the fields. used to obtain data to calculate price
+     */
     const [bookings, setBookings ] = useState()
 
+    /**
+     * Function to map data incoming from database to our local 'bookings' variable
+     * 
+     * @param {object} document incoming structure from firestore.
+     */
     const mapDocToBooking = (document) => {
         return {
             id: document.id,
@@ -28,6 +41,9 @@ const SearchScreen = ({navigation}) => {
         };
     };
 
+    /**
+    * Function streamBookings is used to stream data from database.
+    */
     useEffect(() => {
         const unsubscribe = streamBookings({
             next: querySnapshot => {
@@ -41,9 +57,7 @@ const SearchScreen = ({navigation}) => {
     }, [setBookings]);
     
     return(
-        
         <View style={styles.container}>
-            
             <FlatList
                 data={bookings}
                 renderItem={({item}) => (
@@ -100,15 +114,9 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         borderStyle: 'solid',
         borderRadius: 10,
-        
-
     },
     modalView: {
         padding: 30,
         
     }
 });
-
-
-// <Card style={{padding:0, margin: 0, width: '97%', height: '40%', alignItems: 'center', justifyContent: 'center',}}></Card>
-// </Card>

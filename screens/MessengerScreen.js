@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {View, Text, Button, StyleSheet, Modal, TouchableOpacity, TextInput} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -9,9 +8,16 @@ import db, { streamBookings } from '../db/firestore';
 
 const MessengerScreen = ({navigation}) => {
 
-
+    /**
+     * Data structure where date is key and value are the rest of the fields. used to obtain data to calculate price
+     */
     const [bookings, setBookings ] = useState()
 
+    /**
+     * Function to map data incoming from database to our local 'bookings' variable
+     * 
+     * @param {object} document incoming structure from firestore.
+     */
     const mapDocToBooking = (document) => {
         return {
             id: document.id,
@@ -32,10 +38,12 @@ const MessengerScreen = ({navigation}) => {
             bridePrice: document.data().bridePrice,
             maxMiles: document.data().maxMiles,
             maxMakeups: document.data().maxMakeups,
-
         };
     };
 
+    /**
+    * Function streamBookings is used to stream data from database.
+    */
     useEffect(() => {
         const unsubscribe = streamBookings({
             next: querySnapshot => {

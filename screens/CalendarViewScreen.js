@@ -4,14 +4,14 @@ import { Calendar, CalendarList } from 'react-native-calendars';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import db, { streamBookings } from '../db/firestore';
-import { withRepeat } from 'react-native-reanimated';
+
 
 
 /**
- * Search function to access fields in nested objects
+ * Function to parse our particular shape of data structure associated with the calendar 
  * 
- * @param {*} o - Nested object to look for data in
- * @param {*} s - String name of 
+ * @param {object} o  object being parsed
+ * @param {string} s  string reference whe are
  */
 Object.byString = function(o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); 
@@ -28,29 +28,39 @@ Object.byString = function(o, s) {
     return o;
 }
 
-
+/**
+ * Screen for showing calendar view. pressing a date opens a modal which displays corresponding booking details
+ * 
+ * @param {props} param0 navigation props
+ */
 const CalendarViewScreen = ({navigation}) => {
 
-function bookMarkingsPopulate(){  
+    /**
+     * Function to transform objects from one shape to another as 'items' above
+     */
+    function bookMarkingsPopulate(){  
         const reduced = bookings.reduce((acc, currentItem) => {
             const {weddingDate, ...details} = currentItem;
             acc[weddingDate] = {...details, selected: true, selectedColor: '#CE97B0'
             };
-        
             return acc;
             },{});
             setItems(reduced);
-            
-        };
+    };
 
+    /**
+     * Data structure where date is key and value are the rest of the fields. used to obtain data to calculate price
+     */
     const [items, setItems] = useState({
-        // '2021-09-04': [{}],
-        // '2021-09-11': [{}],
         '2021-09-18': {dots: [notAvailable], selected: false},
-     
     });
     const [bookings, setBookings ] = useState('')
 
+    /**
+     * Function to map data incoming from database to our local 'bookings' variable
+     * 
+     * @param {object} document incoming structure from firestore.
+     */
     const mapDocToBooking = (document) => {
         return {
             id: document.id,
@@ -68,6 +78,9 @@ function bookMarkingsPopulate(){
         };
     };
 
+    /**
+    * Function streamBookings is used to stream data from database.
+    */
     useEffect(() => {
         const unsubscribe = streamBookings({
             next: querySnapshot => {
@@ -80,9 +93,13 @@ function bookMarkingsPopulate(){
         return unsubscribe
     }, [setBookings]);
 
-
+    /**
+     * User settings are currently store as a 'booking' on 2021-09-23. 
+     * This function listens for bookings variable being updated from db
+     * then sets settings date for data to be read from
+     * 
+     */
     useEffect(()=>{
-       
         try{
             bookMarkingsPopulate();
         }
@@ -92,74 +109,60 @@ function bookMarkingsPopulate(){
         
     }, [bookings])
 
-    let str = '';
-
-
+    // Calendar marked dates
     const notAvailable = {key: 'notAvailable', color: 'red'};
     const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
     const workout = {key: 'workout', color: 'green'};
     
+    // variable that holds currently focused date
     const [selectedDate, setSelectedDate] = useState(''); 
     
-
+    // is modal open boolean
     const [modalOpen, setModalOpen] = useState(false);
-    return(
-        
+
+    return(       
         <View style={styles.container}>
-            
-            
-            
             <CalendarList 
-
-             theme={{backgroundColor: '#FDEFEF', calendarBackground: '#FDEFEF',}}
-
-
-            onDayPress={(day) => {setModalOpen(true); setSelectedDate(day.dateString);  }}
-
-            markingType={'dot'}
-            markedDates={items} 
+                theme={{backgroundColor: '#FDEFEF', calendarBackground: '#FDEFEF',}}
+                onDayPress={(day) => {setModalOpen(true); setSelectedDate(day.dateString);  }}
+                markingType={'dot'}
+                markedDates={items} 
             />
-            
-            
             <Modal visible={modalOpen} animationType='slide'>
                 <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
-                <View style={{flexDirection: 'row'}}>
-                    <View style={{flex: 3}}></View>
-                    <View style={{flex: 1}}>
-                        <MaterialIcons
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{flex: 3}}>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <MaterialIcons
                             name='close'
                             size={26}
                             style={globalStyles.modalToggle}
                             onPress={() => setModalOpen(false)}
                             />
+                        </View>
                     </View>
-                </View>
-
                 <View style={{
                     borderRadius: 10,
-            shadowColor: 'rgb(0, 0, 0)',
-            shadowOffset: {
-              width: 3,
-              height: 3,
-            },
-            shadowOpacity: 0.5,
-            shadowRadius: 6,
-            elevation: 2,
-            backgroundColor: 'white',
+                    shadowColor: 'rgb(0, 0, 0)',
+                    shadowOffset: {
+                    width: 3,
+                    height: 3,
+                    },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 6,
+                    elevation: 2,
+                    backgroundColor: 'white',
 
-            padding: 20,
-            margin: 20,
-            
-          }}>
-                    
-                    
+                    padding: 20,
+                    margin: 20,
+                }}>
                     <View style={{height: 1}}>
-                    
-                    <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
-                    <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
-                    <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
-                    <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
-                    </View>
+                        <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
+                        <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
+                        <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
+                        <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
+                </View>
                     <Text></Text>
                     <Text></Text>
                     <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>{selectedDate}</Text>
@@ -183,11 +186,9 @@ function bookMarkingsPopulate(){
                     <Text></Text>
                     <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Number of Makeups:</Text>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, numberOfMakeupsText )}</Text>
-                    
                 </View>
                 </View>
             </Modal>
-            
         </View>
     );
 };
@@ -195,9 +196,7 @@ function bookMarkingsPopulate(){
 export default CalendarViewScreen;
 
 const styles = StyleSheet.create({
-    
     container: {
-       
         backgroundColor: '#FDEFEF'
     },
 });

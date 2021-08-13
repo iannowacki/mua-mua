@@ -560,3 +560,45 @@
                             }}/>
                             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{(numberOfBrides*bridePrice)+(numberOfMothersBridesmaids*bridesmaidMOBPrice)+(juniorBridesmaids*juniorBridesmaidPrice)}</Text>
              */}
+
+              // setBridePrice(brideValueInteger)
+            // setMobPrice(mobValueInteger)
+            // setJuniorPrice(juniorValueInteger)
+            // setBridePrice(parseInt(Object.byString(items, bridePriceText )));
+            // setMobPrice(parseInt(Object.byString(items, bridesmaidMobPriceText )));
+            // setJuniorPrice(parseInt(Object.byString(items, maxMakeupsText )));
+
+                    // const bridePrice = 80;
+        // const mobPrice = 60;
+        // const juniorPrice = 40;
+
+            // const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    // const workout = {key: 'workout', color: 'green'};
+
+     {/* <Text>{setBridePrice(brideValueInteger)}</Text>
+                        <Text>{setMobPrice(mobValueInteger)}</Text>
+                        <Text>{setJuniorPrice(juniorValueInteger)}</Text> */}
+                        // const FormProps = {
+//     name: String
+// }
+
+   {/* <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>MOBS/Bridesmaids:               {numberOfMothersBridesmaids}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Junior Bridesmaids:                {juniorBridesmaids}</Text>
+             */}
+
+             //         let timestamp = new Date( createdAt );
+// let formatted = createdAt.format("dd/mm/yyyy hh:MM:ss");
+      // <Card style={{padding:0, margin: 0, width: '97%', height: '40%', alignItems: 'center', justifyContent: 'center',}}></Card>
+// </Card>
+
+ // const settingsFile = {};
+    
+    // const search = (nameKey, bookings) => {
+    //     for (let i=0; i < bookings.length; i++) {
+    //         if (bookings[i].id == nameKey) {
+    //             settingsFile = bookings[i];
+    //             return myArray[i];
+    //         }
+    //     }
+    // }

@@ -2,16 +2,17 @@ import React, {useState, Component} from 'react';
 import {View, Text, Button, StyleSheet, TextInput, ImageBackground} from 'react-native';
 import { globalStyles } from '../styles/global';
 
-//const backgroundImage = require("../assets/bookin-image.png");
 const staticImage = require("../assets/booking-image.png");
 
+/**
+ * Landing screen for app with new booking button at top
+ * 
+ * @param {props} param0 navigation props
+ */
 const NewBookingScreen = ({navigation}) => {
-    
-    
     return(
         <View style={styles.container}>
             <ImageBackground source={staticImage} style={styles.ImageBackground}/>
-            
         </View>
     );
 };
