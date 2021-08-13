@@ -532,3 +532,31 @@
                 </FlatList>
                 
             </View> */}
+
+            {/* <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Postcode:               {venuePostcode}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Name:           {bookingName}</Text>
+            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Makeups:               {numberOfMakeups}</Text> */}
+
+
+            {/* <Button title={'Calculate price'} onPress={() => {
+
+
+                                setNumberOfBrides()
+                                setNumberOfMothersBridesmaids()
+                                setJuniorBridesmaids()
+                                    
+                                setBridePrice(parseInt(brideValue))
+                                setBridesmaidMOBPrice(parseInt(mobValue))
+                                setJuniorBridesmaidPrice(parseInt(juniorValue))
+                                setMaxMakeups(parseInt(juniorValue))
+                                console.log(juniorValue)
+
+
+                                // setBridePrice(brideValueInteger)
+                                // setMobPrice(mobValueInteger)
+                                // setJuniorPrice(juniorValueInteger)
+                            }}/>
+                            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{(numberOfBrides*bridePrice)+(numberOfMothersBridesmaids*bridesmaidMOBPrice)+(juniorBridesmaids*juniorBridesmaidPrice)}</Text>
+             */}

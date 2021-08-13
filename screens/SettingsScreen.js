@@ -224,14 +224,41 @@ const CreateBooking = () => {
                 {(formikProps) => (
                     <View>
                         <Modal style={{backgroundColor: '#FDEFEF'}} visible={modalOpen} animationType='slide'>
+                            
+                            <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                                <View style={{
+                                    shadowColor: 'rgb(0, 0, 0)',
+                                    shadowOffset: {
+                                    width: 3,
+                                    height: 3,
+                                    },
+                                    shadowOpacity: 0.5,
+                                    shadowRadius: 6,
+                                    elevation: 2,
+                                    backgroundColor: 'white',
+
+                                    padding: 20,
+                                    margin: 20,
+                                    
+                                }}>
 
                         <ScrollView style={{padding:30}}>
-                            <MaterialIcons
+                        <View style={{flexDirection: 'row'}}>
+                    <View style={{flex: 3}}></View>
+                    <View style={{flex: 1}}>
+                        <MaterialIcons
                             name='close'
                             size={26}
                             style={globalStyles.modalToggle}
                             onPress={() => setModalOpen(false)}
                             />
+                    </View>
+                </View>
+                <Text></Text>
+                        <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Update your current settings here</Text>
+
+                                <Text></Text>
+                                <Text></Text>
                         <TextInput style={globalStyles.newBookForm} 
                         placeholder='Max miles travel'
                         onChangeText={formikProps.handleChange('maxMiles')}
@@ -271,11 +298,17 @@ const CreateBooking = () => {
                         keyboardType='numeric'
                         > 
                         </TextInput>
+                        <Text></Text>
+                        <Text></Text>
 
                         <Button title='Confirm Update Settings' color='maroon' onPress={formikProps.handleSubmit}/>
+
+                    
                             
                             
                         </ScrollView>
+                        </View>
+                        </View>
                         </Modal>
     
                       

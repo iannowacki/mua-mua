@@ -141,7 +141,22 @@ const CreateBooking = () => {
     }, [items])
 
     return (
-        <View >
+        <View style={{backgroundColor: '#FDEFEF', flex: 1}} >
+        <View style={{
+            shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 6,
+            elevation: 2,
+            backgroundColor: 'white',
+
+            padding: 20,
+            margin: 20,
+            
+          }}>
             < Formik
                 initialValues={{
                     weddingDate: '', 
@@ -181,12 +196,12 @@ const CreateBooking = () => {
             >
                 
                 {(formikProps) => (
-                    <View>
-                        <View>
+                    <View >
+                        <View >
                 {/* <Button title={'click me'} onPress={setSelectedDate('2021-09-30')} /> */}
-                <View>                  
+                <View style={{backgroundColor: '#FDEFEF'}}>                  
                     <View style={{height: 1}}>
-                        <Text style={{fontSize:24}}>                    {selectedDate}</Text>
+                       
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
                         <Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
@@ -194,9 +209,9 @@ const CreateBooking = () => {
                         <Text style={{color:'#ffffff', fontSize: 1}}>{isAvailableText = selectedDate + '.isAvailable' }</Text>
                         <Text style={{color:'#ffffff', fontSize: 1}}>{isBookedText = selectedDate + '.isBooked' }</Text>
                         <Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
-                    </View>
+                    
                     <Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}</Text>
-        <Text>{console.log(items)}</Text>
+       
                     <Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
                 
@@ -204,9 +219,11 @@ const CreateBooking = () => {
                     <Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}</Text>
                     <Text style={{color:'#ffffff', fontSize: 1}}>{toString(isBookedValue)}</Text>
+                    </View>
                 </View>
             </View>
-            
+                        
+                        <Text style={{fontWeight:'500', fontSize:25, textAlign:'center', padding: 20}}>Enter your details below to check for availability</Text>
                         <TextInput style={globalStyles.newBookForm} 
                         placeholder='Wedding Date "YYYY-MM-DD" '
                         onChangeText={formikProps.handleChange('weddingDate')}
@@ -229,22 +246,18 @@ const CreateBooking = () => {
                         keyboardType='numeric'> 
                         </TextInput>
                         {/* <Button title='check' color='maroon' onPress={()=> setModalOpen(true)} /> */}
-                        <View style={{height: button1Height, width: 370}}>
+                        <View style={{height: button1Height}}>
                             
                         <Button title='check' color='maroon' onPress={() => {
                             setSelectedDate(formikProps.values.weddingDate)
                             setButton1Height(1)
                             setButton2Height(40)
                             setNumberOfMakeups(formikProps.values.numberOfMakeups)
-
-
-
-                            
                          }
                         }
                             />
                             </View>
-                            <View style={{height: button2Height, width: 370}}>
+                            <View style={{height: button2Height}}>
                             <Button title='confirm check' color='maroon' onPress={() => {
                             setSelectedDate(formikProps.values.weddingDate)
                             setButton1Height(40)
@@ -277,6 +290,22 @@ const CreateBooking = () => {
                             </View>
                         
                         <Modal visible={modalOpen} animationType='slide' propagateSwipe={true}>
+                            <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                            <View style={{
+            shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 6,
+            elevation: 2,
+            backgroundColor: 'white',
+
+            padding: 20,
+            margin: 20,
+            
+          }}>
                         <ScrollView style={{padding:10}}>
                             
                             <MaterialIcons
@@ -286,8 +315,9 @@ const CreateBooking = () => {
                                 onPress={() => setModalOpen(false)}
                                 />
                             <View style={styles.modalStyle}>
-                                <Text>It looks like your date is available! please confirm 
+                                <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>Success! it looks like your date is available! please confirm 
                                     rest of details below to complete booking</Text>
+                                <Text></Text>    
                                 
                                 <TextInput style={globalStyles.newBookForm} 
                                 placeholder='Venue Name'
@@ -341,52 +371,24 @@ const CreateBooking = () => {
                                 value={formikProps.values.juniorBridesmaids}>                    
                                 </TextInput>
 
-                                <Button title='sumbit' color='maroon' onPress={formikProps.handleSubmit}/>
+                                
                             </View>
 
-                            {/* <Button title={'Calculate price'} onPress={() => {
-
-
-                                setNumberOfBrides()
-                                setNumberOfMothersBridesmaids()
-                                setJuniorBridesmaids()
-                                    
-                                setBridePrice(parseInt(brideValue))
-                                setBridesmaidMOBPrice(parseInt(mobValue))
-                                setJuniorBridesmaidPrice(parseInt(juniorValue))
-                                setMaxMakeups(parseInt(juniorValue))
-                                console.log(juniorValue)
-
-
-                                // setBridePrice(brideValueInteger)
-                                // setMobPrice(mobValueInteger)
-                                // setJuniorPrice(juniorValueInteger)
-                            }}/>
-                            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:  £{(numberOfBrides*bridePrice)+(numberOfMothersBridesmaids*bridesmaidMOBPrice)+(juniorBridesmaids*juniorBridesmaidPrice)}</Text>
-             */}
+                            
                             
                             <View style={styles.container}>
             
-            {/* <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Postcode:               {venuePostcode}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Name:           {bookingName}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Makeups:               {numberOfMakeups}</Text> */}
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
+            
+            {/* <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>MOBS/Bridesmaids:               {numberOfMothersBridesmaids}</Text>
             <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Junior Bridesmaids:                {juniorBridesmaids}</Text>
-            
-             <Text>{calculatedPrice}</Text>
-            <Button title={'Calculate price'} onPress={() => {
-
-                
-                
-
+             */}
+             <View>
+             
+            <Button title={'Press to calculate price'} onPress={() => {
                 setNumberOfBrides(formikProps.values.numberOfBrides)
                 setNumberOfMothersBridesmaids(formikProps.values.numberOfMothersBridesmaids)
                 setJuniorBridesmaids(formikProps.values.juniorBridesmaids)
-
-               
 
                 const calculatedPrice = (formikProps.values.numberOfBrides*bridePrice) 
                                         + (formikProps.values.numberOfMothersBridesmaids*bridesmaidMOBPrice) 
@@ -397,11 +399,14 @@ const CreateBooking = () => {
                 
 
             }}/>
+            </View>
+            <Text style={{fontWeight:'bold', fontSize:30, textAlign:'center'}}>£{calculatedPrice}</Text>
+            <Button title='Confirm Booking' color='maroon' onPress={formikProps.handleSubmit}/>
+        
             
             
-            
-            <View>                  
-                    <View style={{height: 1}}>
+            <View style={{height: 1}}>                  
+                    <View >
                         <Text style={{fontSize:24}}>                    {selectedDate}</Text>
                         <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
                         <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
@@ -438,6 +443,8 @@ const CreateBooking = () => {
 
 
                         </ScrollView>
+                        </View>
+                        </View>
                         </Modal>
                         
                         
@@ -445,6 +452,7 @@ const CreateBooking = () => {
                     </View>
                 )}
             </Formik>
+        </View>
         </View>
     )
 }

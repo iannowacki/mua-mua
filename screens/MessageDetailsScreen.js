@@ -42,21 +42,64 @@ export default function MessageDetailsScreen  ({route, navigation}) {
 
     
         return <ScrollView >
+            <View>
+            <View style={{padding: 20, backgroundColor:'#FDEFEF'}}>
+            <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>From:</Text>
+            <Text style={{fontWeight:'400', fontSize:25, textAlign:'left'}}>{bookingName}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>Time:</Text>
+            <Text style={{fontWeight:'400', fontSize:15, textAlign:'left'}}>{createdAt}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>Subject:</Text>
+            <Text style={{fontWeight:'400', fontSize:15, textAlign:'left'}}>New booking notification</Text>
+            <Text></Text>
+            <Text></Text>
+            <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>Message:</Text>
+            <Text style={{fontWeight:'400', fontSize:15, textAlign:'left'}}>Congratulations, you have been booked for the {weddingDate} at {venueName}. You can view details of this booking below and you can also see it in your calendar.</Text>
+            </View>
+            <View style={{backgroundColor: '#FDEFEF'}}>
+            <View style={{
+            shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 6,
+            elevation: 2,
+            backgroundColor: 'white',
+
+            padding: 20,
+            margin: 20,
             
-            <View style={styles.container}>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}>From: System Notifitions</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}> {createdAt}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 40}]}>Subject: New booking notification</Text>
-    <Text style={[globalStyles.bodyText, {paddingBottom: 40, padding: 10}]}>Congratulations, you have been booked for the {weddingDate} at {venueName}. You can view details of this booking below and you can see it in your calendar view too.</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Wedding Date:               {weddingDate}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Name:               {venueName}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Venue Postcode:               {venuePostcode}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Name:           {bookingName}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Makeups:               {numberOfMakeups}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Number Of Brides:                {numberOfBrides}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>MOBS/Bridesmaids:               {numberOfMothersBridesmaids}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Junior Bridesmaids:                {juniorBridesmaids}</Text>
-            <Text style={[globalStyles.bodyText, {paddingBottom: 15}]}>Booking Total Price:                     {bookingPrice}</Text>
+          }}
+            >
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Wedding Date:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{weddingDate}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Venue Name:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}> {venueName}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Venue Postcode:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{venuePostcode}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Booking Name:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{bookingName}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Number Of Makeups:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{numberOfMakeups}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Number Of Brides:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{numberOfBrides}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>MOBS/Bridesmaids: </Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{numberOfMothersBridesmaids}</Text>
+            <Text></Text>
+            <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Junior Bridesmaids:</Text>
+            <Text style={{fontWeight:'300', fontSize:15, textAlign:'center'}}>{juniorBridesmaids}</Text>
+            </View>
+            </View>
+
             </View>
         </ScrollView>
     
@@ -69,8 +112,8 @@ export default function MessageDetailsScreen  ({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         backgroundColor: '#FDEFEF'
     },
 });
