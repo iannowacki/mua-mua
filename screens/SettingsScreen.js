@@ -128,36 +128,58 @@ const CreateBooking = () => {
     })
 
     return (
-        <View style={{backgroundColor: '#FDEFEF'}}>
-            <View style={{backgroundColor: '#FDEFEF'}}>                  
-                    <View style={{height: 1}}>
-                        {/* <Text style={{fontSize:24}}>                    {selectedDate}</Text> */}
-                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                        <Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
-                    </View>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                       
-                        <Text>Bride Price:      {Object.byString(items, bridePriceText )}</Text>
-                        <Text>Maids/MOB Price:      {Object.byString(items, bridesmaidMobPriceText )}</Text>
-                        <Text>Junior Price :      {Object.byString(items, juniorPriceText )}</Text>
-                        <Text>Max no. of Makeups:      {Object.byString(items, maxMakeupsText )}</Text>
-                    </View>
-                
+        <View style={{backgroundColor: '#FDEFEF', flex: 1}}>
+        <View  style={{
+            shadowColor: 'rgb(0, 0, 0)',
+            shadowOffset: {
+              width: 3,
+              height: 3,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 6,
+            elevation: 2,
+            backgroundColor: 'white',
+
+            padding: 20,
+            margin: 20,
+          }}>
             
             
             
-            <View style={{backgroundColor: '#FDEFEF'}}>
+            
+           
+            <   View style={{height: 1}}>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                    <Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                </View>
+                <View >
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>My Current Settings</Text>  
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Bride Price:</Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>£{Object.byString(items, bridePriceText )}</Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Maids/MOB Price: </Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>£{Object.byString(items, bridesmaidMobPriceText )}</Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Junior Price : </Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>£{Object.byString(items, juniorPriceText )}</Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Minimum Makeups:  </Text>
+                    <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, maxMakeupsText )}</Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                    <Text></Text>
+                </View>
             < Formik
                 initialValues={{maxMakeups:'', 
                                 maxMiles:'', 
@@ -221,7 +243,7 @@ const CreateBooking = () => {
                         </TextInput>
 
                         <TextInput style={globalStyles.newBookForm} 
-                        placeholder='Max makeups per booking'
+                        placeholder='Min makeups per booking'
                         onChangeText={formikProps.handleChange('maxMakeups')}
                         value={formikProps.values.maxMakeups}
                         keyboardType='numeric'
@@ -258,56 +280,16 @@ const CreateBooking = () => {
                         </ScrollView>
                         </Modal>
     
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
+                      
                         <Button title='Update Settings' color='maroon' onPress={()=> setModalOpen(true)} />
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
+                      
+                       
                         
                     </View>
                 )}
             </Formik>
             </View>
+        
         </View>
     )
 }

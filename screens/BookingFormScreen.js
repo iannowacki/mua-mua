@@ -260,11 +260,11 @@ const CreateBooking = () => {
                             if(bookingNameValue){
                                 alert('sorry but this date is booked, please try another')
                             }
-                            else if(numberOfMakeups < 3 ){
-                                alert('less than minimum makeups: 3')
+                            else if(numberOfMakeups > 7 ){
+                                alert('Sorry, maximum booking size of 7')
                             }
-                            else if (numberOfMakeups > maxMakeups){
-                                alert('over maximum makeups')
+                            else if (numberOfMakeups < maxMakeups){
+                                alert('Does not meet minimum number of make ups of:  ' + maxMakeups)
 
                             }
                             else if(!bookingNameValue && parseInt(formikProps.values.numberOfMakeups) > 3 ){

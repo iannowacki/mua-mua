@@ -37,13 +37,13 @@ const Tabs = () => {
             tabBarIcon: ({focused, color, size, padding}) => {
                 let iconName;
                 if (route.name === 'Calendar') {
-                    iconName = focused ? 'md-calendar' : 'md-calendar-outline';
+                    iconName = focused ? 'md-checkmark-circle' : 'md-calendar-outline';
                 } else if (route.name === 'Messages') {
-                    iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
+                    iconName = focused ? 'md-checkmark-circle' : 'chatbubbles-outline';
                 } else if (route.name === 'New') {
-                    iconName = focused ? 'add-circle' : 'add-circle-outline';
+                    iconName = focused ? 'md-checkmark-circle' : 'add-circle-outline';
                 } else if (route.name === 'Bookings') {
-                    iconName = focused ? 'ios-search-circle' : 'ios-search-circle-outline';
+                    iconName = focused ? 'md-checkmark-circle' : 'ios-search-circle-outline';
                 } else if (route.name === 'Settings') {
                     iconName = focused ? 'md-checkmark-circle' : 'settings-outline';
                 }
