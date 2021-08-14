@@ -260,7 +260,7 @@ const CreateBooking = () => {
                             keyboardType='numeric'
                             >
                             </TextInput>
-
+                            <Text></Text>
                             <TextInput style={globalStyles.newBookForm} 
                             placeholder='Min makeups per booking'
                             onChangeText={formikProps.handleChange('maxMakeups')}
@@ -268,7 +268,7 @@ const CreateBooking = () => {
                             keyboardType='numeric'
                             >
                             </TextInput>
-
+                            <Text></Text>
                             <TextInput style={globalStyles.newBookForm} 
                             placeholder='Price for bride'
                             onChangeText={formikProps.handleChange('bridePrice')}
@@ -276,7 +276,7 @@ const CreateBooking = () => {
                             keyboardType='numeric'
                             > 
                             </TextInput>
-
+                            <Text></Text>
                             <TextInput style={globalStyles.newBookForm} 
                             placeholder='Bridesmaid/MOB price'
                             onChangeText={formikProps.handleChange('bridesmaidMOBPrice')}
@@ -284,7 +284,7 @@ const CreateBooking = () => {
                             keyboardType='numeric'
                             > 
                             </TextInput>
-
+                            <Text></Text>
                             <TextInput style={globalStyles.newBookForm} 
                             placeholder='Price for junior bridesmaid'
                             onChangeText={formikProps.handleChange('juniorBridesmaidPrice')}
@@ -294,13 +294,42 @@ const CreateBooking = () => {
                             </TextInput>
                             <Text></Text>
                             <Text></Text>
-                            <Button title='Confirm Update Settings' color='maroon' onPress={
-                                formikProps.handleSubmit}/>
+                            <Button title='Confirm Update Settings' color='maroon' onPress={()=>{
+                                if(formikProps.values.maxMiles === ''){
+                                    alert('please enter max miles')
+                                }
+                                else if(formikProps.values.maxMakeups === ''){
+                                    alert('please enter minimum makeups per booking')
+                                }
+                                else if(formikProps.values.bridePrice === ''){
+                                    alert('please enter price for brides makeup')
+                                }
+                                else if(formikProps.values.bridesmaidMOBPrice === ''){
+                                    alert('please enter price for bridesmaids/MOBs')
+                                }
+                                else if(formikProps.values.juniorBridesmaidPrice === ''){
+                                    alert('please enter price for junior bridesmaid')
+                                }
+                                else{
+                                formikProps.handleSubmit();
+                                // formikProps.values.maxMakeups = '';
+                                // formikProps.values.maxMiles = '';
+                                // formikProps.values.bridePrice = '';
+                                // formikProps.values.bridesmaidMOBPrice = '';
+                                // formikProps.values.juniorBridesmaidPrice = '';
+                                }}}
+                                />
                         </ScrollView>
                     </View>
                 </View>
                 </Modal>
-                    <Button title='Click here to update Settings' color='maroon' onPress={()=> setModalOpen(true)} />
+                    <Button title='Click here to update Settings' color='maroon' onPress={()=> {
+                        
+                         setModalOpen(true)
+                        }
+                        
+                        
+                        }/>
                     </View>
                 )}
             </Formik>

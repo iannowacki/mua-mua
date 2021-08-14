@@ -38,6 +38,8 @@ const MessengerScreen = ({navigation}) => {
             bridePrice: document.data().bridePrice,
             maxMiles: document.data().maxMiles,
             maxMakeups: document.data().maxMakeups,
+
+            bookingEmail: document.data().bookingEmail,
         };
     };
 

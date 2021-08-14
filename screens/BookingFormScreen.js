@@ -256,14 +256,14 @@ const CreateBooking = () => {
                     value={formikProps.values.weddingDate}
                     >
                     </TextInput>
-                    
+                    <Text></Text>
                     <TextInput style={globalStyles.newBookForm} 
                     placeholder='Venue Postcode'
                     onChangeText={formikProps.handleChange('venuePostcode')}
                     value={formikProps.values.venuePostcode}
                     >
                     </TextInput>
-
+                    <Text></Text>
                     <TextInput style={globalStyles.newBookForm} 
                     placeholder='Number of makeups'
                     onChangeText={formikProps.handleChange('numberOfMakeups')}
@@ -292,11 +292,19 @@ const CreateBooking = () => {
                         let s ='';
                         s=formikProps.values.venuePostcode
                         
-                        console.log('postcode in formik:' + s)
+                        
 
                         
-                        
-                        if(bookingNameValue){
+                        if(formikProps.values.weddingDate === ''){
+                            alert('please enter a date')
+                        }
+                        else if(formikProps.values.venuePostcode === ''){
+                            alert('please enter a postcode')
+                        }
+                        else if(formikProps.values.numberOfMakeups === ''){
+                            alert('please enter how many makeups you require')
+                        }
+                        else if(bookingNameValue){
                             alert('sorry but this date is booked, please try another')
                         }
                         else if(s.charAt(0) !== 'G'){

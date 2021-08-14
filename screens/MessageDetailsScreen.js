@@ -10,7 +10,7 @@ import db from '../db/firestore';
 export default function MessageDetailsScreen  ({route, navigation}) {
     const {id, name, weddingDate, venueName, venuePostcode, bookingName, 
         numberOfMakeups, numberOfBrides,numberOfMothersBridesmaids, 
-        juniorBridesmaids, bookingPrice, createdAt} = route.params; 
+        juniorBridesmaids, bookingPrice, createdAt, bookingEmail} = route.params; 
         
      /**
       * Function for record delete handling
@@ -40,7 +40,8 @@ export default function MessageDetailsScreen  ({route, navigation}) {
                     <View>
                     <View style={{padding: 20, backgroundColor:'#FDEFEF'}}>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>From:</Text>
-                    <Text style={{fontWeight:'400', fontSize:25, textAlign:'left'}}>{bookingName}</Text>
+                    <Text style={{fontWeight:'bold', fontSize:30, textAlign:'left'}}>{bookingName}</Text>
+                    <Text style={{fontWeight:'400', fontSize:15, textAlign:'left'}}>{bookingEmail}</Text>
                     <Text></Text>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'left', color: 'grey'}}>Time:</Text>
                     <Text style={{fontWeight:'400', fontSize:15, textAlign:'left'}}>{createdAt}</Text>
