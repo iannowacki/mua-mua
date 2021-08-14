@@ -33,6 +33,8 @@ Object.byString = function(o, s) {
  */
 
 const CreateBooking = () => {
+   
+    
 
     // Variables for data used to calculate prices and operate booking validation in booking form
     const [numberOfBrides, setNumberOfBrides] = useState(0); 
@@ -44,6 +46,14 @@ const CreateBooking = () => {
     const [maxMakeups, setMaxMakeups] = useState(1); 
     const [numberOfMakeups, setNumberOfMakeups] = useState(0); 
     const [calculatedPrice, setCalculatedPrice ] = useState(0);
+    const [postcode, setPostcode] = useState('');
+    const [testPostcode, setTestPostcode] = useState('G81 1AA')
+
+    useEffect(()=>{
+        console.log('postcode use effect change on postcode :' + postcode)
+        
+    }, [postcode])
+    
     
     
     // Dates details
@@ -241,7 +251,7 @@ const CreateBooking = () => {
                         
                     <Text style={{fontWeight:'500', fontSize:25, textAlign:'center', padding: 20}}>Enter your details below to check for availability</Text>
                     <TextInput style={globalStyles.newBookForm} 
-                    placeholder='Wedding Date "YYYY-MM-DD" '
+                    placeholder='Wedding Date'
                     onChangeText={formikProps.handleChange('weddingDate')}
                     value={formikProps.values.weddingDate}
                     >
@@ -276,11 +286,21 @@ const CreateBooking = () => {
                         setSelectedDate(formikProps.values.weddingDate)
                         setButton1Height(40)
                         setButton2Height(1)
-
                         setNumberOfMakeups(formikProps.values.numberOfMakeups)
+                        setPostcode(formikProps.values.venuePostcode)
+
+                        let s ='';
+                        s=formikProps.values.venuePostcode
+                        
+                        console.log('postcode in formik:' + s)
+
+                        
                         
                         if(bookingNameValue){
                             alert('sorry but this date is booked, please try another')
+                        }
+                        else if(s.charAt(0) !== 'G'){
+                            alert("Sorry, I don't cover this area")
                         }
                         else if(numberOfMakeups > 7 ){
                             alert('Sorry, maximum booking size of 7')
