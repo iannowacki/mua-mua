@@ -23,6 +23,7 @@ const Tabs = () => {
             activeTintColor: '#7D5A5A',
             inactiveTintColor: 'grey',
             inactiveBackgroundColor: '#F4DFD0',
+            showLabel: false,
             labelStyle:{
                 // borderRadius: 5,
                 // height: 60,
@@ -31,6 +32,7 @@ const Tabs = () => {
                 // right: 20,
                 // height: 90,
                 fontSize: 12,
+                
                 
             }
         }}
@@ -41,15 +43,15 @@ const Tabs = () => {
             tabBarIcon: ({focused, color, size, padding}) => {
                 let iconName;
                 if (route.name === 'Calendar') {
-                    iconName = focused ? 'md-checkmark-circle' : 'md-calendar-outline';
+                    iconName = focused ? 'md-calendar' : 'md-calendar-outline';
                 } else if (route.name === 'Messages') {
-                    iconName = focused ? 'md-checkmark-circle' : 'chatbubbles-outline';
+                    iconName = focused ? 'chatbubbles' : 'chatbubbles-outline';
                 } else if (route.name === 'New') {
-                    iconName = focused ? 'md-checkmark-circle' : 'add-circle-outline';
+                    iconName = focused ? 'add-circle' : 'add-circle-outline';
                 } else if (route.name === 'Bookings') {
-                    iconName = focused ? 'md-checkmark-circle' : 'ios-search-circle-outline';
+                    iconName = focused ? 'ios-search-circle' : 'ios-search-circle-outline';
                 } else if (route.name === 'Settings') {
-                    iconName = focused ? 'md-checkmark-circle' : 'settings-outline';
+                    iconName = focused ? 'settings' : 'settings-outline';
                 }
                 return(
                     <Ionicons 
