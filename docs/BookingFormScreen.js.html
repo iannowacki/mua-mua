@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: BookingFormScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: BookingFormScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import { TextInput, View, Button, Text, Modal, StyleSheet, ScrollView } from 'react-native';
+import { Formik, validateYupSchema } from 'formik';
+import db, {streamBookings} from '../db/firestore';
+import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
+import { globalStyles } from '../styles/global';
+import { MaterialIcons } from '@expo/vector-icons';
+
+/**
+ * Function to parse our particular shape of data structure associated with the calendar 
+ * 
+ * @param {object} o  object being parsed
+ * @param {string} s  string reference whe are
+ */
+Object.byString = function(o, s) {
+    s = s.replace(/\[(\w+)\]/g, '.$1'); 
+    s = s.replace(/^\./, '');           
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i &lt; n; ++i) {
+        var k = a[i];
+        if (k in o) {
+            o = o[k];
+        } else {
+            return;
+        }
+    }
+    return o;
+}
+
+/**
+ * Screen to create new booking with part input form with other part on modal
+ */
+
+const CreateBooking = () => {
+   
+    
+
+    // Variables for data used to calculate prices and operate booking validation in booking form
+    const [numberOfBrides, setNumberOfBrides] = useState(0); 
+    const [numberOfMothersBridesmaids, setNumberOfMothersBridesmaids] = useState(0); 
+    const [juniorBridesmaids, setJuniorBridesmaids] = useState(0); 
+    const [bridePrice, setBridePrice] = useState(0); 
+    const [bridesmaidMOBPrice, setBridesmaidMOBPrice] = useState(0); 
+    const [juniorBridesmaidPrice, setJuniorBridesmaidPrice] = useState(0); 
+    const [maxMakeups, setMaxMakeups] = useState(1); 
+    const [numberOfMakeups, setNumberOfMakeups] = useState(0); 
+    const [calculatedPrice, setCalculatedPrice ] = useState(0);
+    const [postcode, setPostcode] = useState('');
+    const [testPostcode, setTestPostcode] = useState('G81 1AA')
+
+    useEffect(()=>{
+        console.log('postcode use effect change on postcode :' + postcode)
+        
+    }, [postcode])
+    
+    
+    
+    // Dates details
+    const notAvailable = {key: 'notAvailable', color: 'red'};
+    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    const workout = {key: 'workout', color: 'green'};
+    
+    // variable that holds currently focused date
+    const [selectedDate, setSelectedDate] = useState('2021-09-23'); 
+
+    // Variables to control height of buttons so only one is visible at a time (doesnt seem to work on android)
+    const [button1Height, setButton1Height] = useState(40); 
+    const [button2Height, setButton2Height] = useState(1); 
+    
+    // Variables relating to navigation and modal
+    const navigation = useNavigation()
+    const [modalOpen, setModalOpen] = useState(false) 
+
+    /**
+     * Data structure where date is key and value are the rest of the fields. used to obtain data to calculate price
+     */
+    const [items, setItems] = useState({
+        '2021-09-18': {dots: [notAvailable], selected: false},
+    });
+    const [bookings, setBookings ] = useState('')
+
+    // Validation schema form booking form
+    const validationSchema = yup.object().shape({
+        name: yup.string().required(),
+    })
+    
+    /**
+     * Function to transform objects from one shape to another as 'items' above
+     */
+    function bookMarkingsPopulate(){  
+        const reduced = bookings.reduce((acc, currentItem) => {
+            const {weddingDate, ...details} = currentItem;
+            acc[weddingDate] = {...details, selected: true, selectedColor: 'red'
+            };
+        
+            return acc;
+            },{});
+            setItems(reduced);
+            
+        };
+    
+     /**
+     * Function to map data incoming from database to our local 'bookings' variable
+     * 
+     * @param {object} document incoming structure from firestore.
+     */
+    const mapDocToBooking = (document) => {
+        return {
+            id: document.id,
+            name: document.data().name,
+            createdAt: document.data().createdAt,
+            weddingDate: document.data().weddingDate,
+            venueName: document.data().venueName,
+            numberOfMakeups: document.data().numberOfMakeups,
+            bookingName: document.data().bookingName,
+            venuePostcode: document.data().venuePostcode,
+            numberOfBrides: document.data().numberOfBrides,
+            numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
+            juniorBridesmaids: document.data().juniorBridesmaids,
+
+            juniorBridesmaidPrice: document.data().juniorBridesmaidPrice,
+            bridesmaidMOBPrice: document.data().bridesmaidMOBPrice,
+            bridePrice: document.data().bridePrice,
+            maxMiles: document.data().maxMiles,
+            maxMakeups: document.data().maxMakeups,
+
+            isAvailable: document.data().isAvailable,
+            isBooked: document.data().isBooked,
+        };
+    };
+
+    /**
+    * Function streamBookings is used to stream data from database.
+    */
+    useEffect(() => {
+        const unsubscribe = streamBookings({
+            next: querySnapshot => {
+                const bookings = querySnapshot
+                .docs.map(docSnapshot => mapDocToBooking(docSnapshot));
+                setBookings(bookings);
+            },
+            error: (error) => console.log(error),
+        });
+        return unsubscribe
+    }, [setBookings]);
+
+    /**
+     * User settings are currently store as a 'booking' on 2021-09-23. 
+     * This function listens for bookings variable being updated from db
+     * then sets settings date for data to be read from
+     * 
+     */
+    useEffect(()=>{
+        try{
+            bookMarkingsPopulate();
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    }, [bookings])
+
+    /**
+     * Sets values to be used in price calculation (once items container has been updated)
+     */
+    useEffect(() =>{
+        setBridePrice(brideValueInteger)
+        setBridesmaidMOBPrice(mobValueInteger)
+        setJuniorBridesmaidPrice(juniorValueInteger)
+        setMaxMakeups(maxMakeupsInteger);
+    }, [items])
+
+   
+
+    return (
+        &lt;View style={{backgroundColor: '#FDEFEF', flex: 1, justifyContent: 'center'}} >
+            &lt;View style={{
+                borderRadius: 10,
+                shadowColor: 'rgb(0, 0, 0)',
+                shadowOffset: {
+                    width: 3,
+                    height: 3,
+                },
+                shadowOpacity: 0.5,
+                shadowRadius: 6,
+                elevation: 2,
+                backgroundColor: 'white',
+                padding: 20,
+                margin: 20,
+            }}>
+            &lt; Formik
+                initialValues={{
+                    weddingDate: '', 
+                    venuePostcode: '', 
+                    numberOfMakeups: '', 
+                    name: '', 
+                    bookingName:'', 
+                    bookingPhone:'', 
+                    bookingEmail:'', 
+                    weddingTime:'',
+                    numberOfBrides:'', 
+                    numberOfMothersBridesmaids:'',
+                    juniorBridesmaids:'',
+                    bookingPrice:'',
+                    venueName:''}}
+                onSubmit={(values) => {
+                    db.collection('bookings').add({
+                        weddingDate: values.weddingDate,
+                        venuePostcode: values.venuePostcode,
+                        numberOfMakeups: values.numberOfMakeups,
+                        bookingName: values.bookingName,
+                        bookingPhone: values.bookingPhone,
+                        bookingEmail: values.bookingEmail,
+                        weddingTime: values.weddingTime,
+                        numberOfBrides: values.numberOfBrides,
+                        numberOfMothersBridesmaids: values.numberOfMothersBridesmaids,
+                        juniorBridesmaids: values.juniorBridesmaids,
+                        bookingPrice: values.bookingPrice,
+                        venueName: values.venueName,
+                        name: values.name,
+                        isAvailable: false,
+                        isBooked: true,
+                        createdAt: new Date().toString(),
+                    }).then(result => navigation.goBack())
+                      .catch(err => console.log(err))
+                  }}
+            >
+                
+                {(formikProps) => (
+                &lt;View style={{marginBottom: '10%',}}>
+                    &lt;View >
+                        &lt;View style={{backgroundColor: '#FDEFEF'}}>                  
+                            &lt;View style={{height: 1}}>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{bridePriceText = selectedDate + '.bridePrice'}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{maxMakeupsText = selectedDate + '.maxMakeups' }&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{isAvailableText = selectedDate + '.isAvailable' }&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{isBookedText = selectedDate + '.isBooked' }&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{bookingNameText = selectedDate + '.bookingName' }&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Bride Price:      {brideValue = Object.byString(items, bridePriceText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Maids/MOB Price:      {mobValue = Object.byString(items, bridesmaidMobPriceText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Junior Price :      {juniorValue = Object.byString(items, juniorPriceText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Max no. of Makeups:      {maxMakeupsValue = Object.byString(items, maxMakeupsText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Is Booked?:      {isBookedValue = Object.byString(items, isBookedText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>Booking Name:      {bookingNameValue = Object.byString(items, bookingNameText )}&lt;/Text>
+                                &lt;Text style={{color:'#ffffff', fontSize: 1}}>{toString(isBookedValue)}&lt;/Text>
+                            &lt;/View>
+                        &lt;/View>
+                    &lt;/View>
+                        
+                    &lt;Text style={{fontWeight:'500', fontSize:25, textAlign:'center', padding: 20}}>Enter your details below to check for availability&lt;/Text>
+                    &lt;TextInput style={globalStyles.newBookForm} 
+                    placeholder='Wedding Date'
+                    onChangeText={formikProps.handleChange('weddingDate')}
+                    value={formikProps.values.weddingDate}
+                    >
+                    &lt;/TextInput>
+                    &lt;Text>&lt;/Text>
+                    &lt;TextInput style={globalStyles.newBookForm} 
+                    placeholder='Venue Postcode'
+                    onChangeText={formikProps.handleChange('venuePostcode')}
+                    value={formikProps.values.venuePostcode}
+                    >
+                    &lt;/TextInput>
+                    &lt;Text>&lt;/Text>
+                    &lt;TextInput style={globalStyles.newBookForm} 
+                    placeholder='Number of makeups'
+                    onChangeText={formikProps.handleChange('numberOfMakeups')}
+                    value={formikProps.values.numberOfMakeups}
+                    keyboardType='numeric'> 
+                    &lt;/TextInput>
+                    &lt;Text>&lt;/Text>
+                    &lt;View style={{height: button1Height}}>
+                        
+                    &lt;Button title='check' color='maroon' onPress={() => {
+                        setSelectedDate(formikProps.values.weddingDate)
+                        setButton1Height(1)
+                        setButton2Height(40)
+                        setNumberOfMakeups(formikProps.values.numberOfMakeups)
+                        }
+                    }
+                    />
+                &lt;/View>
+                &lt;View style={{height: button2Height}}>
+                    &lt;Button title='confirm check' color='maroon' onPress={() => {
+                        setSelectedDate(formikProps.values.weddingDate)
+                        setButton1Height(40)
+                        setButton2Height(1)
+                        setNumberOfMakeups(formikProps.values.numberOfMakeups)
+                        setPostcode(formikProps.values.venuePostcode)
+
+                        let s ='';
+                        s=formikProps.values.venuePostcode
+                        
+                        
+
+                        
+                        if(formikProps.values.weddingDate === ''){
+                            alert('please enter a date')
+                        }
+                        else if(formikProps.values.venuePostcode === ''){
+                            alert('please enter a postcode')
+                        }
+                        else if(formikProps.values.numberOfMakeups === ''){
+                            alert('please enter how many makeups you require')
+                        }
+                        else if(bookingNameValue){
+                            alert('sorry but this date is booked, please try another')
+                        }
+                        else if(s.charAt(0) !== 'G'){
+                            alert("Sorry, I don't cover this area")
+                        }
+                        else if(numberOfMakeups > 7 ){
+                            alert('Sorry, maximum booking size of 7')
+                        }
+                        else if (numberOfMakeups &lt; maxMakeups){
+                            alert('Does not meet minimum number of make ups of:  ' + maxMakeups)
+
+                        }
+                        else if(!bookingNameValue &amp;&amp; parseInt(formikProps.values.numberOfMakeups) > 3 ){
+                            setModalOpen(true);
+                        }
+                    }
+                    }
+                    />
+                &lt;/View>
+                        
+                        &lt;Modal visible={modalOpen} animationType='slide' propagateSwipe={true}>
+                            &lt;View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                            &lt;View style={{
+                                borderRadius: 10,
+                                shadowColor: 'rgb(0, 0, 0)',
+                                shadowOffset: {
+                                width: 3,
+                                height: 3,
+                                },
+                                shadowOpacity: 0.5,
+                                shadowRadius: 6,
+                                elevation: 2,
+                                backgroundColor: 'white',
+
+                                padding: 10,
+                                margin: 20,
+                                
+                            }}
+                            >
+                            &lt;ScrollView style={{padding:10}}>
+                                &lt;MaterialIcons
+                                    name='close'
+                                    size={26}
+                                    style={styles.modalToggle}
+                                    onPress={() => setModalOpen(false)}
+                                />
+                                &lt;View style={styles.modalStyle}>
+                                    &lt;Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>Success! it looks like your date is available! please confirm 
+                                        rest of details below to complete booking&lt;/Text>
+                                &lt;Text>&lt;/Text>    
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Venue Name'
+                                    onChangeText={formikProps.handleChange('venueName')}
+                                    value={formikProps.values.venueName}
+                                    >
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Booking Name'
+                                    onChangeText={formikProps.handleChange('bookingName')}
+                                    value={formikProps.values.bookingName}
+                                    > 
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Phone Number'
+                                    onChangeText={formikProps.handleChange('bookingPhone')}
+                                    value={formikProps.values.bookingPhone}
+                                    keyboardType='numeric'> 
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Email'
+                                    onChangeText={formikProps.handleChange('bookingEmail')}
+                                    value={formikProps.values.bookingEmail}>                    
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Ceremony time'
+                                    onChangeText={formikProps.handleChange('weddingTime')}
+                                    value={formikProps.values.weddingTime}>                    
+                                    &lt;/TextInput>
+
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Number of brides (max 2)'
+                                    onChangeText={formikProps.handleChange('numberOfBrides')}
+                                    value={formikProps.values.numberOfBrides}>                    
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Bridesmaids / M.O.Bs'
+                                    onChangeText={formikProps.handleChange('numberOfMothersBridesmaids')}
+                                    value={formikProps.values.numberOfMothersBridesmaids}>                    
+                                    &lt;/TextInput>
+
+                                    &lt;TextInput style={globalStyles.newBookForm} 
+                                    placeholder='Junior bridesmaids (u14)'
+                                    onChangeText={formikProps.handleChange('juniorBridesmaids')}
+                                    value={formikProps.values.juniorBridesmaids}>                    
+                                    &lt;/TextInput>
+                                &lt;/View>
+                                &lt;View style={styles.container}>
+                                    &lt;View> 
+                                        &lt;Button title={'Press to calculate price'} onPress={() => {
+                                            setNumberOfBrides(formikProps.values.numberOfBrides)
+                                            setNumberOfMothersBridesmaids(formikProps.values.numberOfMothersBridesmaids)
+                                            setJuniorBridesmaids(formikProps.values.juniorBridesmaids)
+
+                                            const calculatedPrice = (formikProps.values.numberOfBrides*bridePrice) 
+                                                                    + (formikProps.values.numberOfMothersBridesmaids*bridesmaidMOBPrice) 
+                                                                    + (formikProps.values.juniorBridesmaids*juniorBridesmaidPrice)
+                                            console.log ('Calculated Price: ' + calculatedPrice)
+
+                                            setCalculatedPrice(calculatedPrice)
+                                        }}/>
+                                    &lt;/View>
+                                        &lt;Text style={{fontWeight:'bold', fontSize:30, textAlign:'center'}}>£{calculatedPrice}&lt;/Text>
+                                        &lt;Button title='Confirm Booking' color='maroon' onPress={formikProps.handleSubmit}/>
+                                        &lt;Text>&lt;/Text>
+                                        &lt;View style={{height: 1}}>                  
+                                            &lt;View >
+                                                &lt;Text style={{fontSize:24}}>                    {selectedDate}&lt;/Text>
+                                                &lt;Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}&lt;/Text>
+                                                &lt;Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }&lt;/Text>
+                                                &lt;Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}&lt;/Text>
+                                                &lt;Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }&lt;/Text>
+                                            &lt;/View>
+                                            &lt;Text>My Current Prices:&lt;/Text>
+                                            &lt;Text>Bride :      {brideValue = Object.byString(items, bridePriceText )}&lt;/Text>
+                                            &lt;Text>Maid/MOB :      {mobValue = Object.byString(items, bridesmaidMobPriceText )}&lt;/Text>
+                                            &lt;Text>Junior :      {juniorValue = Object.byString(items, juniorPriceText )}&lt;/Text>
+                                            &lt;Text>Max Makeups :      {maximumMakeups = Object.byString(items, maxMakeupsText )}&lt;/Text>
+                                            &lt;View style={{height: 1}}>
+                                                &lt;Text>{brideValueInteger = parseInt(brideValue)}&lt;/Text>
+                                                &lt;Text>{mobValueInteger = parseInt(mobValue)}&lt;/Text>
+                                                &lt;Text>{juniorValueInteger = parseInt(juniorValue)}&lt;/Text>
+                                                &lt;Text>{maxMakeupsInteger = parseInt(maximumMakeups)}&lt;/Text>
+                                            &lt;/View>
+                                        &lt;/View>
+                                    &lt;/View>  
+                                &lt;/ScrollView>
+                            &lt;/View>
+                        &lt;/View>
+                    &lt;/Modal>                
+                &lt;/View>
+                )}
+                &lt;/Formik>
+            &lt;/View>
+        &lt;/View>
+    )
+}
+
+export default CreateBooking
+
+const styles = StyleSheet.create({
+    modalStyle:{
+        padding: 10,
+        paddingTop: 40,
+    },
+    modalToggle:{
+        marginBottom: 6,
+        marginTop: 5,
+        marginRight: 5,
+        borderWidth: 2,
+        borderColor: 'maroon',
+        color: 'maroon',
+        padding: 6,
+        borderRadius: 4,
+        alignSelf: 'flex-end',
+    }
+})
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CalendarViewScreen">CalendarViewScreen</a></li><li><a href="global.html#CreateBooking">CreateBooking</a></li><li><a href="global.html#NewBookingScreen">NewBookingScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Aug 15 2021 16:32:13 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

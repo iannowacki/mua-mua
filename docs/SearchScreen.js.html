@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: SearchScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: SearchScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from 'react';
+import {View, Text, Button, StyleSheet, Modal, TouchableOpacity, TextInput} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FlatList } from 'react-native-gesture-handler';
+import {globalStyles} from '../styles/global';
+import db, { streamBookings } from '../db/firestore';
+import {Card} from 'react-native-shadow-cards';
+
+
+/**
+ * Screen to display all bookings in a flat list (planned to be search page)
+ * 
+ * @param {props} param0 props passed through navigation
+ */
+const SearchScreen = ({navigation}) => {
+    
+    /**
+     * Data structure where date is key and value are the rest of the fields. used to obtain data to calculate price
+     */
+    const [bookings, setBookings ] = useState()
+
+    /**
+     * Function to map data incoming from database to our local 'bookings' variable
+     * 
+     * @param {object} document incoming structure from firestore.
+     */
+    const mapDocToBooking = (document) => {
+        return {
+            id: document.id,
+            name: document.data().name,
+            createdAt: document.data().createdAt,
+            weddingDate: document.data().weddingDate,
+            venueName: document.data().venueName,
+            numberOfMakeups: document.data().numberOfMakeups,
+            bookingName: document.data().bookingName,
+            venuePostcode: document.data().venuePostcode,
+            numberOfBrides: document.data().numberOfBrides,
+            numberOfMothersBridesmaids : document.data().numberOfMothersBridesmaids,
+            juniorBridesmaids: document.data().juniorBridesmaids,
+
+        };
+    };
+
+    /**
+    * Function streamBookings is used to stream data from database.
+    */
+    useEffect(() => {
+        const unsubscribe = streamBookings({
+            next: querySnapshot => {
+                const bookings = querySnapshot
+                .docs.map(docSnapshot => mapDocToBooking(docSnapshot));
+                setBookings(bookings);
+            },
+            error: (error) => console.log(error),
+        });
+        return unsubscribe
+    }, [setBookings]);
+    
+    return(
+        &lt;View style={styles.container}>
+            &lt;FlatList
+                data={bookings}
+                renderItem={({item}) => (
+                    &lt;View  style={{
+                        borderRadius: 10,
+                        shadowColor: 'rgb(0, 0, 0)',
+                        shadowOffset: {
+                          width: 3,
+                          height: 3,
+                        },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 6,
+                        elevation: 2,
+                        backgroundColor: 'white',
+            
+                        padding: 12,
+                        margin: 12,
+                      }}>
+                    
+                    &lt;TouchableOpacity style={styles.flatListItem} onPress={() => navigation.navigate('BookingDetailsScreen', item)}>
+                        &lt;Text style={globalStyles.bodyTextDark}>Date: {item.weddingDate}&lt;/Text>
+                        &lt;Text style={globalStyles.bodyText}>Venue: {item.venueName}&lt;/Text>
+                        &lt;Text style={globalStyles.bodyText}>Name: {item.bookingName}&lt;/Text>
+                        &lt;Text style={globalStyles.bodyText}>Makeups: {item.numberOfMakeups}&lt;/Text>
+                    &lt;/TouchableOpacity>
+                    
+                    &lt;/View>
+                )}
+            >
+            &lt;/FlatList>
+        &lt;/View>
+    );
+};
+
+
+export default SearchScreen;
+
+const shadowStyle={
+    shadowOpacity:0.5,
+    shadowRadius:20,
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FDEFEF'
+    },
+    flatListItem:{
+        padding: 5,
+        marginTop: 5,
+        borderColor: '#7D5A5A',
+        borderWidth: 0,
+        borderStyle: 'solid',
+        borderRadius: 10,
+    },
+    modalView: {
+        padding: 30,
+        
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CalendarViewScreen">CalendarViewScreen</a></li><li><a href="global.html#CreateBooking">CreateBooking</a></li><li><a href="global.html#NewBookingScreen">NewBookingScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Aug 15 2021 16:32:13 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
