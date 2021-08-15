@@ -129,7 +129,7 @@ const CalendarViewScreen = ({navigation}) => {
                 markedDates={items} 
             />
             <Modal visible={modalOpen} animationType='slide'>
-                <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                <View style={{backgroundColor: '#FDEFEF', flex: 1, justifyContent: 'center' }}>
                     
                 <View style={{
                     borderRadius: 10,

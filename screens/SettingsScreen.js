@@ -133,7 +133,7 @@ const CreateBooking = () => {
     })
 
     return (
-        <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+        <View style={{backgroundColor: '#FDEFEF', flex: 1, justifyContent: 'center', }}>
             <View  style={{
                 borderRadius: 10,
                 shadowColor: 'rgb(0, 0, 0)',
@@ -148,6 +148,7 @@ const CreateBooking = () => {
 
                 padding: 20,
                 margin: 20,
+                
                 
             }}>
                 <View style={{height: 1}}>
@@ -217,9 +218,9 @@ const CreateBooking = () => {
                   }}
             >
                 {(formikProps) => (
-                    <View>
+                    <View style={{justifyContent: 'center'}}>
                         <Modal style={{backgroundColor: '#FDEFEF'}} visible={modalOpen} animationType='slide'>
-                            <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
+                            <View style={{backgroundColor: '#FDEFEF', flex: 1, justifyContent: 'center', }}>
                                 <View style={{
                                     borderRadius: 10,
                                     shadowColor: 'rgb(0, 0, 0)',

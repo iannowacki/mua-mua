@@ -164,7 +164,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
 
 
     return (
-        <View style={{backgroundColor: '#FDEFEF', flex: 1}}>
+        <View style={{backgroundColor: '#FDEFEF', flex: 1, }}>
         <ScrollView>
             <View style={{backgroundColor: '#FDEFEF'}}>
                 <View style={{

@@ -173,7 +173,7 @@ const CreateBooking = () => {
    
 
     return (
-        <View style={{backgroundColor: '#FDEFEF', flex: 1}} >
+        <View style={{backgroundColor: '#FDEFEF', flex: 1, justifyContent: 'center'}} >
             <View style={{
                 borderRadius: 10,
                 shadowColor: 'rgb(0, 0, 0)',
@@ -227,7 +227,7 @@ const CreateBooking = () => {
             >
                 
                 {(formikProps) => (
-                <View style={{marginBottom: '10%'}}>
+                <View style={{marginBottom: '10%',}}>
                     <View >
                         <View style={{backgroundColor: '#FDEFEF'}}>                  
                             <View style={{height: 1}}>
