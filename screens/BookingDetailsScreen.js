@@ -182,6 +182,26 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                     margin: 20,
                     
                     }}>
+                        <View>                  
+                        <View style={{height: 1}}>
+                            <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
+                            <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
+                            <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
+                            <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
+                        </View>
+                        <View style={{height: 1}}>
+                            <Text style={{color:'#ffffff'}}>My Current Prices:</Text>
+                            <Text style={{color:'#ffffff'}}>Bride :      {brideValue = Object.byString(items, bridePriceText )}</Text>
+                            <Text style={{color:'#ffffff'}}>Maid/MOB :      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
+                            <Text style={{color:'#ffffff'}}>Junior :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
+                        </View>
+                        <View style={{height: 1}}>
+                            
+                            <Text style={{color:'#ffffff'}}>{brideValueInteger = parseInt(brideValue)}</Text>
+                            <Text style={{color:'#ffffff'}}>{mobValueInteger = parseInt(mobValue)}</Text>
+                            <Text style={{color:'#ffffff'}}>{juniorValueInteger = parseInt(juniorValue)}</Text>
+                        </View>
+                    </View>
             
                     <Text style={{fontWeight:'300', fontSize:12, textAlign:'center'}}>Wedding Date:</Text>
                     <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>{weddingDate}</Text>
@@ -216,26 +236,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                     <Text style={[globalStyles.bodyText, {paddingBottom: 15, textAlign:'center'}]}>Booking Total Price:  £{((parseInt(numberOfBrides)*bridePrice))+(parseInt(numberOfMothersBridesmaids)*mobPrice)+(parseInt(juniorBridesmaids)*juniorPrice)}</Text>
             
             
-                    <View>                  
-                        <View style={{height: 1}}>
-                            <Text style={{color:'#ffffff'}}>{bridePriceText = selectedDate + '.bridePrice'}</Text>
-                            <Text style={{color:'#ffffff'}}>{bridesmaidMobPriceText = selectedDate + '.bridesmaidMOBPrice' }</Text>
-                            <Text style={{color:'#ffffff'}}>{juniorPriceText = selectedDate + '.juniorBridesmaidPrice'}</Text>
-                            <Text style={{color:'#ffffff'}}>{maxMakeupsText = selectedDate + '.maxMakeups' }</Text>
-                        </View>
-                        <View style={{height: 1}}>
-                            <Text style={{color:'#ffffff'}}>My Current Prices:</Text>
-                            <Text style={{color:'#ffffff'}}>Bride :      {brideValue = Object.byString(items, bridePriceText )}</Text>
-                            <Text style={{color:'#ffffff'}}>Maid/MOB :      {mobValue = Object.byString(items, bridesmaidMobPriceText )}</Text>
-                            <Text style={{color:'#ffffff'}}>Junior :      {juniorValue = Object.byString(items, juniorPriceText )}</Text>
-                        </View>
-                        <View style={{height: 1}}>
-                            
-                            <Text style={{color:'#ffffff'}}>{brideValueInteger = parseInt(brideValue)}</Text>
-                            <Text style={{color:'#ffffff'}}>{mobValueInteger = parseInt(mobValue)}</Text>
-                            <Text style={{color:'#ffffff'}}>{juniorValueInteger = parseInt(juniorValue)}</Text>
-                        </View>
-                    </View>
+                    
                 </View>  
             </View>
         </ScrollView>

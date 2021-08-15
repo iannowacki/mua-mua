@@ -49,14 +49,14 @@ const Tabs = () => {
                 } else if (route.name === 'New') {
                     iconName = focused ? 'add-circle' : 'add-circle-outline';
                 } else if (route.name === 'Bookings') {
-                    iconName = focused ? 'ios-search-circle' : 'ios-search-circle-outline';
+                    iconName = focused ? 'ios-search' : 'ios-search-outline';
                 } else if (route.name === 'Settings') {
                     iconName = focused ? 'settings' : 'settings-outline';
                 }
                 return(
                     <Ionicons 
                     name={iconName} 
-                    size={size} 
+                    size={35} 
                     color={color} 
                     
                     />

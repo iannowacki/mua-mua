@@ -227,7 +227,7 @@ const CreateBooking = () => {
             >
                 
                 {(formikProps) => (
-                <View >
+                <View style={{marginBottom: '10%'}}>
                     <View >
                         <View style={{backgroundColor: '#FDEFEF'}}>                  
                             <View style={{height: 1}}>
@@ -270,6 +270,7 @@ const CreateBooking = () => {
                     value={formikProps.values.numberOfMakeups}
                     keyboardType='numeric'> 
                     </TextInput>
+                    <Text></Text>
                     <View style={{height: button1Height}}>
                         
                     <Button title='check' color='maroon' onPress={() => {
@@ -425,6 +426,7 @@ const CreateBooking = () => {
                                     </View>
                                         <Text style={{fontWeight:'bold', fontSize:30, textAlign:'center'}}>£{calculatedPrice}</Text>
                                         <Button title='Confirm Booking' color='maroon' onPress={formikProps.handleSubmit}/>
+                                        <Text></Text>
                                         <View style={{height: 1}}>                  
                                             <View >
                                                 <Text style={{fontSize:24}}>                    {selectedDate}</Text>

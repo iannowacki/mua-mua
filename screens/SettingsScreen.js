@@ -232,11 +232,11 @@ const CreateBooking = () => {
                                     elevation: 2,
                                     backgroundColor: 'white',
 
-                                    padding: 20,
-                                    margin: 20,
+                                    padding: 10,
+                                    margin:20,
                                 }}>
 
-                    <ScrollView style={{padding:30}}>
+                    <ScrollView style={{padding:20}}>
                         <View style={{flexDirection: 'row'}}>
                             <View style={{flex: 3}}>
                             </View>
@@ -248,7 +248,7 @@ const CreateBooking = () => {
                                     onPress={() => setModalOpen(false)}
                                 />
                             </View>
-                        </View>
+                        </View >
                             <Text></Text>
                             <Text style={{fontWeight:'bold', fontSize:18, textAlign:'center'}}>Update your current settings here</Text>
                             <Text></Text>
@@ -319,6 +319,9 @@ const CreateBooking = () => {
                                 // formikProps.values.juniorBridesmaidPrice = '';
                                 }}}
                                 />
+                                <Text></Text>
+                                <Text></Text>
+                                <Text></Text>
                         </ScrollView>
                     </View>
                 </View>
@@ -330,6 +333,7 @@ const CreateBooking = () => {
                         
                         
                         }/>
+                        
                     </View>
                 )}
             </Formik>

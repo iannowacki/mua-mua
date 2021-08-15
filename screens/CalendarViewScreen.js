@@ -130,18 +130,7 @@ const CalendarViewScreen = ({navigation}) => {
             />
             <Modal visible={modalOpen} animationType='slide'>
                 <View style={{backgroundColor: '#FDEFEF', flex: 1, alignContent: 'center', }}>
-                    <View style={{flexDirection: 'row'}}>
-                        <View style={{flex: 3}}>
-                        </View>
-                        <View style={{flex: 1}}>
-                            <MaterialIcons
-                            name='close'
-                            size={26}
-                            style={globalStyles.modalToggle}
-                            onPress={() => setModalOpen(false)}
-                            />
-                        </View>
-                    </View>
+                    
                 <View style={{
                     borderRadius: 10,
                     shadowColor: 'rgb(0, 0, 0)',
@@ -157,16 +146,29 @@ const CalendarViewScreen = ({navigation}) => {
                     padding: 20,
                     margin: 20,
                 }}>
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{flex: 3}}>
+                        </View>
+                        <View style={{flex: 1}}>
+                            <MaterialIcons
+                            name='close'
+                            size={26}
+                            style={globalStyles.modalToggle}
+                            onPress={() => setModalOpen(false)}
+                            />
+                        </View>
+                    </View>
+                    
+                    <Text></Text>
+                    <Text></Text>
+                    <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>{selectedDate}</Text>
+                    <Text></Text>
                     <View style={{height: 1}}>
                         <Text style={{color:'#ffffff'}}>{venueNameText = selectedDate + '.venueName'}</Text>
                         <Text style={{color:'#ffffff'}}>{bookingNameText = selectedDate + '.bookingName' }</Text>
                         <Text style={{color:'#ffffff'}}>{postcodeText = selectedDate + '.venuePostcode'}</Text>
                         <Text style={{color:'#ffffff'}}>{numberOfMakeupsText = selectedDate + '.numberOfMakeups' }</Text>
                 </View>
-                    <Text></Text>
-                    <Text></Text>
-                    <Text style={{fontWeight:'400', fontSize:25, textAlign:'center', textDecorationLine:'underline'}}>{selectedDate}</Text>
-                    <Text></Text>
                     <Text></Text>
                     <Text style={{fontWeight:'bold', fontSize:25, textAlign:'center'}}>Venue:</Text>
                     <Text style={{fontWeight:'300', fontSize:20, textAlign:'center'}}>{Object.byString(items, venueNameText )}</Text>

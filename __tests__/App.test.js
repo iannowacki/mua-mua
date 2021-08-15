@@ -1,9 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {render} from '@testing-library/react-native';
-
 import {addNumbers} from '../src/mathUtils';
-
 import App from '../App';
 
 //Check correct number of component children
@@ -14,7 +12,7 @@ describe('<App />', () => {
   });
 });
 
-
+//Check component renders correctly
 test('render App.js', () => {
   const {debug} = render(<App/>);
   debug();
