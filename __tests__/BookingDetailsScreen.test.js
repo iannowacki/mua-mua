@@ -16,3 +16,4 @@ test('render BookingDetailsScreen.js', () => {
   render(<BookingDetailsScreen/>);
 
 })
+
