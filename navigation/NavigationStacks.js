@@ -51,8 +51,9 @@ const CalendarViewScreenNavigator = () => {
                 <Ionicons 
                   name={'ios-add'} 
                   size={44} 
-                  color={'#2D2424'} 
-                  style={{marginRight: 25}} />
+                  color={'#7D5A5A'} 
+                  style={{marginRight: 25, 
+                  }} />
               </TouchableWithoutFeedback>
             ),
             headerStyle: {

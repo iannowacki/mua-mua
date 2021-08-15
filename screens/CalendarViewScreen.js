@@ -139,7 +139,7 @@ const CalendarViewScreen = ({navigation}) => {
                     height: 3,
                     },
                     shadowOpacity: 0.5,
-                    shadowRadius: 6,
+                    shadowRadius: 10,
                     elevation: 2,
                     backgroundColor: 'white',
 

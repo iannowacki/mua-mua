@@ -340,7 +340,7 @@ const CreateBooking = () => {
                                 elevation: 2,
                                 backgroundColor: 'white',
 
-                                padding: 20,
+                                padding: 10,
                                 margin: 20,
                                 
                             }}
@@ -464,12 +464,12 @@ export default CreateBooking
 
 const styles = StyleSheet.create({
     modalStyle:{
-        padding: 20,
+        padding: 10,
         paddingTop: 40,
     },
     modalToggle:{
         marginBottom: 6,
-        marginTop: 40,
+        marginTop: 5,
         marginRight: 5,
         borderWidth: 2,
         borderColor: 'maroon',

@@ -164,6 +164,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
 
 
     return (
+        <View style={{backgroundColor: '#FDEFEF', flex: 1}}>
         <ScrollView>
             <View style={{backgroundColor: '#FDEFEF'}}>
                 <View style={{
@@ -180,7 +181,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
 
                     padding: 20,
                     margin: 20,
-                    
+                    flex:1
                     }}>
                         <View>                  
                         <View style={{height: 1}}>
@@ -240,6 +241,7 @@ export default function BookingDetailsScreen  ({route, navigation}) {
                 </View>  
             </View>
         </ScrollView>
+        </View>
         )};
 
 const styles = StyleSheet.create({
